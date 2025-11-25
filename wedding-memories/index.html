@@ -126,18 +126,127 @@
     /* Fade-in utilities */
     .anim-fadeIn { animation: fadeIn 900ms ease-out both; }
     .anim-fadeIn-slow { animation: fadeIn 1200ms ease-out both; }
-    .reveal { opacity: 0; transform: translateY(34px) scale(0.95); filter: blur(6px); transition: opacity 520ms cubic-bezier(.22,.61,.36,1), transform 520ms cubic-bezier(.22,.61,.36,1), filter 520ms cubic-bezier(.22,.61,.36,1); }
-    .reveal.in-view { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    .reveal { opacity: 1; transform: translateY(34px) scale(0.95); filter: none; transition: opacity 520ms cubic-bezier(.22,.61,.36,1), transform 520ms cubic-bezier(.22,.61,.36,1), filter 520ms cubic-bezier(.22,.61,.36,1); }
+    .reveal.in-view { opacity: 1; transform: translateY(0) scale(1); filter: none; }
     .reveal-left { transform: translateX(-36px) scale(0.98); }
     .reveal-right { transform: translateX(36px) scale(0.98); }
     .reveal-left.in-view, .reveal-right.in-view { transform: translateX(0) scale(1); }
     /* Background slow zoom in/out */
-    @keyframes bgZoom { 0%{transform:scale(1.02)} 50%{transform:scale(1.08)} 100%{transform:scale(1.02)} }
-    .anim-bgZoom { animation: bgZoom 16s ease-in-out infinite; will-change: transform; }
+    @keyframes bgZoom { 0%{transform:scale(1.0)} 50%{transform:scale(1.03)} 100%{transform:scale(1.0)} }
+    .anim-bgZoom { animation: bgZoom 20s ease-in-out infinite; will-change: transform; }
     @keyframes heartPulse { 0%{transform:scale(1); opacity:0.9} 50%{transform:scale(1.16); opacity:1} 100%{transform:scale(1); opacity:0.9} }
     @keyframes floatParticle { 0%{transform:translate3d(0,0,0); opacity:0} 20%{opacity:0.9} 60%{transform:translate3d(8px,-18px,0); opacity:0.9} 100%{transform:translate3d(-4px,-32px,0); opacity:0} }
     .heart-pulse { animation: heartPulse 1.8s ease-in-out infinite; }
     .particle-soft { animation: floatParticle 10s ease-in-out infinite; }
+    /* Simple vertical wedding timeline */
+    .simple-timeline-line {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .simple-timeline-axis {
+      position: relative;
+      width: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .simple-timeline-dot {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background-color: #ffffff;
+      box-shadow: none;
+    }
+    /* Timeline animation states */
+    .timeline-line-stroke {
+      stroke: #ffffff;
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      stroke-dasharray: 260;
+      stroke-dashoffset: 260;
+      filter: drop-shadow(0 0 0 rgba(244,215,138,0.0));
+      transition: stroke-dashoffset 1200ms cubic-bezier(.22,.9,.28,1),
+                  filter 1200ms cubic-bezier(.22,.9,.28,1);
+    }
+    .reveal.in-view .timeline-line-stroke {
+      stroke-dashoffset: 0;
+      filter: drop-shadow(0 0 12px rgba(244,215,138,0.55));
+    }
+
+    .simple-timeline-dot {
+      opacity: 0;
+      transform: scale(0.6);
+      box-shadow: 0 0 0 0 rgba(212,175,55,0.7);
+      transition: opacity 520ms cubic-bezier(.22,.9,.28,1),
+                  transform 520ms cubic-bezier(.22,.9,.28,1),
+                  box-shadow 520ms cubic-bezier(.22,.9,.28,1);
+    }
+    .reveal.in-view .simple-timeline-dot {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.9);
+    }
+    .simple-timeline-line.reveal.in-view article:nth-of-type(1) .simple-timeline-dot { transition-delay: 120ms; }
+    .simple-timeline-line.reveal.in-view article:nth-of-type(2) .simple-timeline-dot { transition-delay: 240ms; }
+    .simple-timeline-line.reveal.in-view article:nth-of-type(3) .simple-timeline-dot { transition-delay: 360ms; }
+    .simple-timeline-line.reveal.in-view article:nth-of-type(4) .simple-timeline-dot { transition-delay: 480ms; }
+
+    .simple-timeline-icon svg {
+      opacity: 0;
+      transform: translateX(-30px) scale(0.95);
+      transition: opacity 600ms cubic-bezier(.22,.9,.28,1),
+                  transform 600ms cubic-bezier(.22,.9,.28,1),
+                  filter 600ms cubic-bezier(.22,.9,.28,1);
+    }
+    .reveal.in-view .simple-timeline-icon svg {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      filter: drop-shadow(0 0 14px rgba(212,175,55,0.5));
+    }
+
+    .timeline-time,
+    .timeline-title,
+    .timeline-desc {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 520ms cubic-bezier(.22,.9,.28,1),
+                  transform 520ms cubic-bezier(.22,.9,.28,1);
+    }
+    .reveal.in-view .timeline-time { opacity: 1; transform: translateY(0); transition-delay: 80ms; }
+    .reveal.in-view .timeline-title { opacity: 1; transform: translateY(0); transition-delay: 160ms; }
+    .reveal.in-view .timeline-desc { opacity: 1; transform: translateY(0); transition-delay: 240ms; }
+
+    .simple-timeline-card:hover .simple-timeline-icon svg { transform: translateX(0) scale(1.04); filter: drop-shadow(0 0 18px rgba(212,175,55,0.8)); }
+    .simple-timeline-card:hover { transform: translateY(-4px); }
+    .simple-timeline-card { transition: transform 420ms cubic-bezier(.22,.9,.28,1); }
+    /* Love Story timeline: very thin, light center line, no dots */
+    .love-story-timeline .timeline-line-stroke { stroke-width: 0.1; stroke: rgba(255,255,255,0.4); }
+    .love-story-timeline .simple-timeline-dot { display: none; }
+    /* Smooth reveal for Love Story cards */
+    .love-story-timeline .simple-timeline-item {
+      opacity: 0;
+      transform: translateY(36px);
+      transition:
+        opacity 600ms cubic-bezier(.22,.9,.28,1),
+        transform 600ms cubic-bezier(.22,.9,.28,1);
+    }
+    .love-story-timeline .simple-timeline-item.reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Schedule timeline: thin, slightly softer center line */
+    .schedule-timeline .timeline-line-stroke { stroke-width: 0.1; stroke: rgba(255,255,255,0.65); }
+    @media (min-width: 768px) {
+      .simple-timeline-dot { left: 1px; }
+    }
+    /* On small screens, make Love Story line a bit stronger so it's visible */
+    @media (max-width: 640px) {
+      .love-story-timeline .timeline-line-stroke { stroke-width: 0.1; stroke: rgba(255,255,255,0.3); }
+    }
     /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
       .anim-fadeUp, .anim-fadeUp-delay, .anim-fadeUp-more,
@@ -272,9 +381,9 @@
           <div class="mb-8 sm:mb-10 w-52 sm:w-64 md:w-72 aspect-[3/4] rounded-t-[60%] rounded-b-[32px] overflow-hidden bg-roseveil/80 border border-roseveil shadow-soft">
             <img src="./assets/img2.png" alt="Wedding reception" class="w-full h-full object-cover">
           </div>
-          <h2 class="font-serif text-2xl sm:text-3xl tracking-[0.03em] text-deepred-700" data-stagger>Wedding Reception</h2>
+          <h1 class="font-serif text-2xl sm:text-3xl tracking-[0.03em] text-deepred-700" data-stagger>Wedding Reception</h1>
           <p class="mt-2 text-xs sm:text-sm tracking-[0.16em] uppercase text-deepred-700/60" data-stagger>
-            Hotel Subham Palace, Sivakasi
+            Rasi Mahal, Sivakasi
           </p>
           <p class="mt-3 text-[11px] sm:text-xs tracking-[0.26em] uppercase font-semibold text-deepred-700" data-stagger>
             At 06:30 PM
@@ -286,7 +395,7 @@
                 <span class="font-medium whitespace-nowrap">Friday</span>
               </div>
               <div class="flex items-baseline gap-2 mx-auto">
-                <span class="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[0.12em] text-deepred-700">21</span>
+                <span class="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[0.12em] text-deepred-700">20</span>
                 <span class="font-serif text-2xl sm:text-3xl tracking-[0.4em] text-deepred-700/70">/</span>
                 <span class="font-serif text-3xl sm:text-4xl font-semibold tracking-[0.18em] text-deepred-700">02</span>
               </div>
@@ -311,6 +420,314 @@
               </svg>
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="relative py-20 sm:py-24 bg-black/5 overflow-hidden">
+    <div class="absolute inset-0 anim-bgZoom" style="background-image:url('./assets/loveStroyBg.jpg'); background-size:cover; background-position:center; filter:blur(4px);"></div>
+    <div class="absolute inset-0 bg-black/55"></div>
+    <div class="relative container mx-auto px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto text-center mb-10 sm:mb-14 reveal">
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl tracking-[0.08em] text-white">Our Love Story</h2>
+        <p class="mt-3 text-xs sm:text-sm tracking-[0.28em] uppercase text-white/70">Moments that led us to forever</p>
+      </div>
+      <div class="simple-timeline-line love-story-timeline reveal">
+        <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 flex justify-center">
+          <svg class="h-full" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true">
+            <line class="timeline-line-stroke" x1="1" y1="0" x2="1" y2="100" />
+          </svg>
+        </div>
+        <div class="space-y-20 sm:space-y-24 relative">
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="flex justify-end pr-0 sm:pr-4">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop" alt="First meeting" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2020</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">First Meeting</h3>
+              <p class="text-sm sm:text-base text-white/80">Met through a shared best friend and felt an instant connection.</p>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="pr-0 sm:pr-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2020</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">First Date</h3>
+              <p class="text-sm sm:text-base text-white/80">Coffee turned into long conversations and endless laughter.</p>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4 flex justify-start">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=1200&auto=format&fit=crop" alt="First date" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="flex justify-end pr-0 sm:pr-4">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1544829728-e5cb9eed0309?q=80&w=1200&auto=format&fit=crop" alt="Officially together" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2021</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">Officially Together</h3>
+              <p class="text-sm sm:text-base text-white/80">Promises were made and the journey of us truly began.</p>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="pr-0 sm:pr-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2021</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">Families United</h3>
+              <p class="text-sm sm:text-base text-white/80">Two families came together with blessings and happy tears.</p>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4 flex justify-start">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Families meet" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="flex justify-end pr-0 sm:pr-4">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop" alt="First trip" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2022</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">First Getaway</h3>
+              <p class="text-sm sm:text-base text-white/80">A memorable trip filled with sunsets, photos and shared dreams.</p>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="pr-0 sm:pr-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2022</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">The Proposal</h3>
+              <p class="text-sm sm:text-base text-white/80">A heartfelt question, a joyful yes and happy tears all around.</p>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4 flex justify-start">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Proposal" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="flex justify-end pr-0 sm:pr-4">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1529636443204-55f4685c9ddd?q=80&w=1200&auto=format&fit=crop" alt="Engagement" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2023</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">Ring Ceremony</h3>
+              <p class="text-sm sm:text-base text-white/80">Exchanging rings in front of the people who mean the most.</p>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="pr-0 sm:pr-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2024</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">Planning Together</h3>
+              <p class="text-sm sm:text-base text-white/80">Late-night calls, checklists and excitement for the big day.</p>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4 flex justify-start">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1518600506278-4e8ef466b810?q=80&w=1200&auto=format&fit=crop" alt="Wedding planning" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="flex justify-end pr-0 sm:pr-4">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1530276372020-704cde3099c4?q=80&w=1200&auto=format&fit=crop" alt="Pre-wedding shoot" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2025</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">Pre-Wedding Shoot</h3>
+              <p class="text-sm sm:text-base text-white/80">Capturing laughter, stolen glances and quiet moments together.</p>
+            </div>
+          </article>
+
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
+            <div class="pr-0 sm:pr-4" data-stagger>
+              <p class="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">2026</p>
+              <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">Wedding Day</h3>
+              <p class="text-sm sm:text-base text-white/80">The day two hearts, two families and countless memories became one.</p>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-0 sm:pl-4 flex justify-start">
+              <div class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
+                <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1529957711660-c541ce4e0a33?q=80&w=1200&auto=format&fit=crop" alt="Wedding day" class="w-full h-full object-cover">
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="relative py-20 sm:py-24 bg-[#3B2217] text-white">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto text-center mb-12 sm:mb-16 reveal">
+        <h2 class="font-serif text-[22px] sm:text-[24px] tracking-[0.32em] uppercase text-white/90 mb-3">
+          Join our celebration of love
+        </h2>
+        <p class="font-serif text-[20px] sm:text-[30px] tracking-[0.18em] text-white/80">
+          19.02.26
+        </p>
+      </div>
+      <div class="simple-timeline-line schedule-timeline reveal">
+        <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 flex justify-center">
+          <svg class="h-full" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true">
+            <line class="timeline-line-stroke" x1="1" y1="0" x2="1" y2="100" />
+          </svg>
+        </div>
+        <div class="space-y-16 sm:space-y-20 relative">
+          <!-- 09:00 AM – Warm Welcome -->
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
+            <div class="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Wedding rings" role="img">
+                <g fill="none" stroke="#F4D78A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="16" r="5" />
+                  <circle cx="20" cy="12" r="5" />
+                  <path d="M18 7l1.4-2.4L22 4.5" />
+                </g>
+              </svg>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-2 sm:pl-4 text-left">
+              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19T09:00">09:00 AM</time>
+              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[40px] font-serif font-bold text-white">Warm Welcome</p>
+              <p class="timeline-desc mt-1 text-[14px] text-white/85">Guests arrive &amp; greetings.</p>
+            </div>
+          </article>
+
+          <!-- 09:30 AM – Save the Moments -->
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
+            <div class="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Camera icon" role="img">
+                <g fill="none" stroke="#F4D78A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="11" width="18" height="12" rx="2" />
+                  <circle cx="14" cy="17" r="4" />
+                  <path d="M9 11l1.8-3H18l1.8 3" />
+                  <rect x="17" y="7" width="8" height="6" rx="1" />
+                </g>
+              </svg>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-2 sm:pl-4 text-left">
+              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19T09:30">09:30 AM</time>
+              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[40px] font-serif font-bold text-white">Save the Moments</p>
+              <p class="timeline-desc mt-1 text-[14px] text-white/85">Ceremony photos &amp; rituals.</p>
+            </div>
+          </article>
+
+          <!-- 10:00 AM – Champagne Ceremony (cake icon) -->
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
+            <div class="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Wedding cake" role="img">
+                <g fill="none" stroke="#F4D78A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 13h10v4H11z" />
+                  <path d="M9 17h14v4H9z" />
+                  <path d="M7 21h18v4H7z" />
+                  <path d="M14 13v-3h4v3" />
+                  <path d="M15 8l1-1.5L17 8" />
+                </g>
+              </svg>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-2 sm:pl-4 text-left">
+              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19T10:00">10:00 AM</time>
+              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[40px] font-serif font-bold text-white">Champagne Ceremony</p>
+              <p class="timeline-desc mt-1 text-[14px] text-white/85">Toast to the couple.</p>
+            </div>
+          </article>
+
+          <!-- 10:30 AM – Party and Dance -->
+          <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
+            <div class="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Dinner plate" role="img">
+                <g fill="none" stroke="#F4D78A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="16" cy="16" r="6" />
+                  <circle cx="16" cy="16" r="3" />
+                  <path d="M8 10v12" />
+                  <path d="M24 10v12" />
+                  <path d="M7 11h2" />
+                  <path d="M23 11h2" />
+                </g>
+              </svg>
+            </div>
+            <div class="flex flex-col items-center gap-3 simple-timeline-axis">
+              <span class="simple-timeline-dot"></span>
+            </div>
+            <div class="pl-2 sm:pl-4 text-left">
+              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19T10:30">10:30 AM</time>
+              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[40px] font-serif font-bold text-white">Party and Dance</p>
+              <p class="timeline-desc mt-1 text-[14px] text-white/85">Music, lights &amp; dancing together.</p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
