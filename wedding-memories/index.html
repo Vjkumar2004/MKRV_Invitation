@@ -238,6 +238,99 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Premium horizontal album gallery */
+    .album-simple-section {
+      background: #ffffff;
+    }
+    .album-simple-carousel {
+      position: relative;
+    }
+    .album-simple-viewport {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 2.5rem; /* 40px approx */
+      padding-block: 0.5rem 1.5rem;
+      padding-inline: min(5vw, 3rem);
+      width: 100%;
+      margin-inline: auto;
+      perspective: 1200px;
+    }
+    /* Hide scrollbar for album viewport (keep scroll functional) */
+    .album-simple-viewport::-webkit-scrollbar {
+      display: none;
+    }
+    .album-simple-viewport {
+      -ms-overflow-style: none;  /* IE/Edge */
+      scrollbar-width: none;     /* Firefox */
+    }
+    .album-simple-track {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 2.5rem; /* keep equal spacing */
+    }
+    .album-simple-card {
+      position: relative;
+      scroll-snap-align: center;
+      width: min(320px, 26vw);
+      aspect-ratio: 3 / 4;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      flex-shrink: 0;
+      transform-origin: center center;
+      transition:
+        transform 520ms cubic-bezier(.22,.61,.36,1),
+        opacity 520ms cubic-bezier(.22,.61,.36,1),
+        box-shadow 520ms cubic-bezier(.22,.61,.36,1),
+        filter 520ms cubic-bezier(.22,.61,.36,1);
+      opacity: 0.9;
+    }
+    .album-simple-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .album-simple-card--center {
+      opacity: 1;
+      transform: scale(1) translateZ(0) rotateY(0deg);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.26);
+      filter: brightness(1.05);
+    }
+    .album-simple-card--side {
+      opacity: 0.75;
+      transform: scale(0.92) translateZ(-40px) rotateY(var(--tilt, 0deg));
+    }
+    .album-simple-card:hover {
+      transform: translateY(-6px) scale(1.02) rotateY(0deg);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.28);
+      opacity: 1;
+    }
+    @media (max-width: 768px) {
+      .album-simple-viewport {
+        gap: 1.75rem;
+        padding-inline: 1.25rem;
+      }
+      .album-simple-card {
+        width: min(320px, 82vw);
+      }
+    }
+
+    /* On large screens, show exactly three album cards per view */
+    @media (min-width: 1024px) {
+      .album-simple-card {
+        width: calc((100% - 2 * 2.5rem) / 3); /* 3 cards + 2 gaps */
+      }
+    }
+
     /* Schedule timeline: thin, slightly softer center line */
     .schedule-timeline .timeline-line-stroke { stroke-width: 0.1; stroke: rgba(255,255,255,0.65); }
     @media (min-width: 768px) {
@@ -628,9 +721,6 @@
         <h2 class="font-serif text-[22px] sm:text-[24px] tracking-[0.32em] uppercase text-white/90 mb-3">
           Join our celebration of love
         </h2>
-        <p class="font-serif text-[20px] sm:text-[30px] tracking-[0.18em] text-white/80">
-          19.02.26
-        </p>
       </div>
       <div class="simple-timeline-line schedule-timeline reveal">
         <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 flex justify-center">
@@ -639,7 +729,7 @@
           </svg>
         </div>
         <div class="space-y-16 sm:space-y-20 relative">
-          <!-- 09:00 AM – Warm Welcome -->
+          <!-- 25/01/2026 – Bride to be -->
           <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
             <div class="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Wedding rings" role="img">
@@ -654,13 +744,13 @@
               <span class="simple-timeline-dot"></span>
             </div>
             <div class="pl-2 sm:pl-4 text-left">
-              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19T09:00">09:00 AM</time>
-              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[40px] font-serif font-bold text-white">Warm Welcome</p>
-              <p class="timeline-desc mt-1 text-[14px] text-white/85">Guests arrive &amp; greetings.</p>
+              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-01-25">25/01/2026</time>
+              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[20px] font-serif font-bold text-white">Bride to be</p>
+              <p class="timeline-desc mt-1 text-[14px] text-white/85">Pre-wedding celebration for the bride.</p>
             </div>
           </article>
 
-          <!-- 09:30 AM – Save the Moments -->
+          <!-- 25/01/2026 – Halti -->
           <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
             <div class="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Camera icon" role="img">
@@ -676,13 +766,13 @@
               <span class="simple-timeline-dot"></span>
             </div>
             <div class="pl-2 sm:pl-4 text-left">
-              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19T09:30">09:30 AM</time>
-              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[40px] font-serif font-bold text-white">Save the Moments</p>
-              <p class="timeline-desc mt-1 text-[14px] text-white/85">Ceremony photos &amp; rituals.</p>
+              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-01-25">25/01/2026</time>
+              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[20px] font-serif font-bold text-white">Halti</p>
+              <p class="timeline-desc mt-1 text-[14px] text-white/85">Traditional Halti ceremony with family and friends.</p>
             </div>
           </article>
 
-          <!-- 10:00 AM – Champagne Ceremony (cake icon) -->
+          <!-- 19/02/2026 – Engagment / sangeeth -->
           <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
             <div class="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Wedding cake" role="img">
@@ -699,23 +789,20 @@
               <span class="simple-timeline-dot"></span>
             </div>
             <div class="pl-2 sm:pl-4 text-left">
-              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19T10:00">10:00 AM</time>
-              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[40px] font-serif font-bold text-white">Champagne Ceremony</p>
-              <p class="timeline-desc mt-1 text-[14px] text-white/85">Toast to the couple.</p>
+              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19">19/02/2026</time>
+              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[20px] font-serif font-bold text-white">Engagment / sangeeth</p>
+              <p class="timeline-desc mt-1 text-[14px] text-white/85">Engagement and sangeeth night filled with music and joy.</p>
             </div>
           </article>
 
-          <!-- 10:30 AM – Party and Dance -->
+          <!-- 20/02/2026 – Marriage -->
           <article class="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
             <div class="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Dinner plate" role="img">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-20 w-20 sm:h-24 sm:w-24" aria-label="Wedding ceremony" role="img">
                 <g fill="none" stroke="#F4D78A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="16" cy="16" r="6" />
-                  <circle cx="16" cy="16" r="3" />
-                  <path d="M8 10v12" />
-                  <path d="M24 10v12" />
-                  <path d="M7 11h2" />
-                  <path d="M23 11h2" />
+                  <path d="M8 22h16v3H8z" />
+                  <path d="M11 22v-5a5 5 0 0 1 10 0v5" />
+                  <path d="M16 7l2 3h-4z" />
                 </g>
               </svg>
             </div>
@@ -723,11 +810,54 @@
               <span class="simple-timeline-dot"></span>
             </div>
             <div class="pl-2 sm:pl-4 text-left">
-              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-19T10:30">10:30 AM</time>
-              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[40px] font-serif font-bold text-white">Party and Dance</p>
-              <p class="timeline-desc mt-1 text-[14px] text-white/85">Music, lights &amp; dancing together.</p>
+              <time class="timeline-time block font-serif text-[13px] sm:text-[14px] tracking-[0.2em] uppercase text-gold-400" datetime="2026-02-20">20/02/2026</time>
+              <p class="timeline-title mt-1 text-[22px] sm:text-[28px] lg:text-[20px] font-serif font-bold text-white">Marriage</p>
+              <p class="timeline-desc mt-1 text-[14px] text-white/85">The wedding ceremony where we begin our forever.</p>
             </div>
           </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="relative py-16 sm:py-24 album-simple-section">
+    <div class="container mx-auto px-4 sm:px-6">
+      <div class="max-w-4xl mx-auto text-center mb-10 sm:mb-14 reveal">
+        <p class="text-[11px] tracking-[0.32em] uppercase text-deepred-700/70" data-stagger>Our Sweet Moments</p>
+        <h2 class="mt-2 font-serif text-3xl sm:text-4xl md:text-5xl tracking-[0.04em] text-deepred-700" data-stagger>Album Pre wedding</h2>
+      </div>
+      <div class="album-simple-carousel reveal relative" data-album-simple-carousel>
+        <!-- Mobile-only navigation buttons -->
+        <button type="button" class="md:hidden absolute left-2 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-white shadow-soft border border-deepred-700/10 flex items-center justify-center" data-album-prev>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 text-deepred-700">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6l6-6" />
+          </svg>
+        </button>
+        <button type="button" class="md:hidden absolute right-2 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-white shadow-soft border border-deepred-700/10 flex items-center justify-center" data-album-next>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 text-deepred-700">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6l-6 6" />
+          </svg>
+        </button>
+        <div class="album-simple-viewport">
+          <div class="album-simple-track" data-album-simple-track>
+            <figure class="album-simple-card album-simple-card--active" data-album-simple-card>
+              <img src="./assets/img2.png" alt="Album moment 1">
+            </figure>
+            <figure class="album-simple-card" data-album-simple-card>
+              <img src="./assets/img2.png" alt="Album moment 2">
+            </figure>
+            <figure class="album-simple-card" data-album-simple-card>
+              <img src="./assets/img2.png" alt="Album moment 3">
+            </figure>
+            <figure class="album-simple-card" data-album-simple-card>
+              <img src="./assets/img2.png" alt="Album moment 4">
+            </figure>
+            <figure class="album-simple-card" data-album-simple-card>
+              <img src="./assets/img2.png" alt="Album moment 5">
+            </figure>
+            <figure class="album-simple-card" data-album-simple-card>
+              <img src="./assets/img2.png" alt="Album moment 6">
+            </figure>
+          </div>
         </div>
       </div>
     </div>
@@ -742,7 +872,10 @@
             el.classList.add('in-view');
             const kids = el.querySelectorAll('[data-stagger]');
             kids.forEach((k, i)=>{ k.style.transitionDelay = (100 + i*120) + 'ms'; k.style.transitionTimingFunction = ease; });
-            observer.unobserve(el);
+          } else {
+            // For Our Love Story timeline, keep items in-view once triggered
+            if (el.closest && el.closest('.love-story-timeline')) return;
+            el.classList.remove('in-view');
           }
         })
       }, { threshold: 0.2 });
@@ -791,6 +924,79 @@
 
         updateCountdown();
         setInterval(updateCountdown, 1000);
+      }
+
+      // Premium horizontal gallery: highlight center card on scroll
+      const simpleTrack = document.querySelector('[data-album-simple-track]');
+      const simpleCards = simpleTrack ? Array.from(simpleTrack.querySelectorAll('[data-album-simple-card]')) : [];
+      const simpleViewport = document.querySelector('.album-simple-viewport');
+
+      const updateSimpleAlbum = () => {
+        if (!simpleViewport || !simpleCards.length) return;
+        const viewportRect = simpleViewport.getBoundingClientRect();
+        const viewportCenter = viewportRect.left + viewportRect.width / 2;
+
+        simpleCards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          const cardCenter = rect.left + rect.width / 2;
+          const distance = (cardCenter - viewportCenter) / rect.width; // in card-width units
+
+          const isCenter = Math.abs(distance) < 0.4;
+          const isSide = Math.abs(distance) >= 0.4 && Math.abs(distance) < 1.4;
+
+          card.classList.toggle('album-simple-card--center', isCenter);
+          card.classList.toggle('album-simple-card--side', isSide);
+
+          // Tilt based on side
+          const tilt = distance < 0 ? -10 : 10;
+          card.style.setProperty('--tilt', isSide ? `${tilt}deg` : '0deg');
+        });
+      };
+
+      if (simpleViewport && simpleCards.length) {
+        let rafId = null;
+        const onScroll = () => {
+          if (rafId) return;
+          rafId = requestAnimationFrame(() => {
+            updateSimpleAlbum();
+            rafId = null;
+          });
+        };
+
+        simpleViewport.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', updateSimpleAlbum);
+        updateSimpleAlbum();
+
+        // Auto-scroll album: move one card right every 1 second and loop
+        let currentAlbumIndex = 0;
+        const scrollToAlbumIndex = (index) => {
+          const card = simpleCards[index];
+          if (!card) return;
+          const left = card.offsetLeft - (simpleTrack ? simpleTrack.offsetLeft : 0);
+          simpleViewport.scrollTo({ left, behavior: 'smooth' });
+        };
+
+        setInterval(() => {
+          currentAlbumIndex = (currentAlbumIndex + 1) % simpleCards.length;
+          scrollToAlbumIndex(currentAlbumIndex);
+        }, 3000); // slower motion: move every 3 seconds
+
+        // Mobile nav buttons: previous / next
+        const prevBtn = document.querySelector('[data-album-prev]');
+        const nextBtn = document.querySelector('[data-album-next]');
+
+        const goToPrev = () => {
+          currentAlbumIndex = (currentAlbumIndex - 1 + simpleCards.length) % simpleCards.length;
+          scrollToAlbumIndex(currentAlbumIndex);
+        };
+
+        const goToNext = () => {
+          currentAlbumIndex = (currentAlbumIndex + 1) % simpleCards.length;
+          scrollToAlbumIndex(currentAlbumIndex);
+        };
+
+        if (prevBtn) prevBtn.addEventListener('click', goToPrev);
+        if (nextBtn) nextBtn.addEventListener('click', goToNext);
       }
     })();
   </script>
