@@ -1,0 +1,541 @@
+/* Extra visual refinements using utility-friendly CSS variables */
+.glass {
+  backdrop-filter: saturate(120%) blur(18px);
+}
+
+.mask-wave-top {
+  -webkit-mask: radial-gradient(120% 60% at 50% 120%, transparent 58%, black 60%);
+  mask: radial-gradient(120% 60% at 50% 120%, transparent 58%, black 60%);
+}
+
+.mask-wave-bottom {
+  -webkit-mask: radial-gradient(120% 60% at 50% -20%, transparent 58%, black 60%);
+  mask: radial-gradient(120% 60% at 50% -20%, transparent 58%, black 60%);
+}
+
+/* Minimal intro animations (not dependent on Tailwind config) */
+@keyframes waveInLeft {
+  0% {
+    opacity: .0;
+    transform: translateX(-40%) rotate(-1deg)
+  }
+
+  60% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0)
+  }
+}
+
+@keyframes waveInRight {
+  0% {
+    opacity: .0;
+    transform: translateX(40%) rotate(1deg)
+  }
+
+  60% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0)
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1
+  }
+
+  to {
+    opacity: 0
+  }
+}
+
+/* stroke dash draw */
+@keyframes drawDash {
+  from {
+    stroke-dashoffset: 1000
+  }
+
+  to {
+    stroke-dashoffset: 0
+  }
+}
+
+.wave-left {
+  animation: waveInLeft 3000ms cubic-bezier(.22, .61, .36, 1) forwards, fadeOut 600ms linear 3000ms forwards;
+}
+
+.wave-right {
+  animation: waveInRight 3000ms cubic-bezier(.22, .61, .36, 1) forwards, fadeOut 600ms linear 3000ms forwards;
+}
+
+.heart-stroke {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: fadeIn 300ms ease-out 3000ms forwards, drawDash 3600ms ease-in-out 3000ms forwards;
+}
+
+.heart-glow {
+  animation: fadeIn 800ms ease-out 3800ms forwards;
+}
+
+/* Hero gentle fades and floating */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+@keyframes floatSlow {
+  0% {
+    transform: translateY(0)
+  }
+
+  50% {
+    transform: translateY(-6px)
+  }
+
+  100% {
+    transform: translateY(0)
+  }
+}
+
+.anim-fadeUp {
+  animation: fadeUp 900ms ease-out both;
+}
+
+.anim-fadeUp-delay {
+  animation: fadeUp 1000ms ease-out 150ms both;
+}
+
+.anim-fadeUp-more {
+  animation: fadeUp 1000ms ease-out 250ms both;
+}
+
+.anim-floatSlow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+/* Fade-in utilities */
+.anim-fadeIn {
+  animation: fadeIn 900ms ease-out both;
+}
+
+.anim-fadeIn-slow {
+  animation: fadeIn 1200ms ease-out both;
+}
+
+.reveal {
+  opacity: 1;
+  transform: translateY(34px) scale(0.95);
+  filter: none;
+  transition: opacity 520ms cubic-bezier(.22, .61, .36, 1), transform 520ms cubic-bezier(.22, .61, .36, 1), filter 520ms cubic-bezier(.22, .61, .36, 1);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: none;
+}
+
+.reveal-left {
+  transform: translateX(-36px) scale(0.98);
+}
+
+.reveal-right {
+  transform: translateX(36px) scale(0.98);
+}
+
+.reveal-left.in-view,
+.reveal-right.in-view {
+  transform: translateX(0) scale(1);
+}
+
+/* Background slow zoom in/out */
+@keyframes bgZoom {
+  0% {
+    transform: scale(1.0)
+  }
+
+  50% {
+    transform: scale(1.03)
+  }
+
+  100% {
+    transform: scale(1.0)
+  }
+}
+
+.anim-bgZoom {
+  animation: bgZoom 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes heartPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.9
+  }
+
+  50% {
+    transform: scale(1.16);
+    opacity: 1
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.9
+  }
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0
+  }
+
+  20% {
+    opacity: 0.9
+  }
+
+  60% {
+    transform: translate3d(8px, -18px, 0);
+    opacity: 0.9
+  }
+
+  100% {
+    transform: translate3d(-4px, -32px, 0);
+    opacity: 0
+  }
+}
+
+.heart-pulse {
+  animation: heartPulse 1.8s ease-in-out infinite;
+}
+
+.particle-soft {
+  animation: floatParticle 10s ease-in-out infinite;
+}
+
+/* Simple vertical wedding timeline */
+.simple-timeline-line {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.simple-timeline-axis {
+  position: relative;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.simple-timeline-dot {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background-color: #ffffff;
+  box-shadow: none;
+}
+
+/* Timeline animation states */
+.timeline-line-stroke {
+  stroke: #ffffff;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  filter: drop-shadow(0 0 0 rgba(244, 215, 138, 0.0));
+  transition: stroke-dashoffset 1200ms cubic-bezier(.22, .9, .28, 1),
+    filter 1200ms cubic-bezier(.22, .9, .28, 1);
+}
+
+.reveal.in-view .timeline-line-stroke {
+  stroke-dashoffset: 0;
+  filter: drop-shadow(0 0 12px rgba(244, 215, 138, 0.55));
+}
+
+.simple-timeline-dot {
+  opacity: 0;
+  transform: scale(0.6);
+  box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  transition: opacity 520ms cubic-bezier(.22, .9, .28, 1),
+    transform 520ms cubic-bezier(.22, .9, .28, 1),
+    box-shadow 520ms cubic-bezier(.22, .9, .28, 1);
+}
+
+.reveal.in-view .simple-timeline-dot {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.9);
+}
+
+.simple-timeline-line.reveal.in-view article:nth-of-type(1) .simple-timeline-dot {
+  transition-delay: 120ms;
+}
+
+.simple-timeline-line.reveal.in-view article:nth-of-type(2) .simple-timeline-dot {
+  transition-delay: 240ms;
+}
+
+.simple-timeline-line.reveal.in-view article:nth-of-type(3) .simple-timeline-dot {
+  transition-delay: 360ms;
+}
+
+.simple-timeline-line.reveal.in-view article:nth-of-type(4) .simple-timeline-dot {
+  transition-delay: 480ms;
+}
+
+.simple-timeline-icon svg {
+  opacity: 0;
+  transform: translateX(-30px) scale(0.95);
+  transition: opacity 600ms cubic-bezier(.22, .9, .28, 1),
+    transform 600ms cubic-bezier(.22, .9, .28, 1),
+    filter 600ms cubic-bezier(.22, .9, .28, 1);
+}
+
+.reveal.in-view .simple-timeline-icon svg {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.5));
+}
+
+.timeline-time,
+.timeline-title,
+.timeline-desc {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 520ms cubic-bezier(.22, .9, .28, 1),
+    transform 520ms cubic-bezier(.22, .9, .28, 1);
+}
+
+.reveal.in-view .timeline-time {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+
+.reveal.in-view .timeline-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 160ms;
+}
+
+.reveal.in-view .timeline-desc {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 240ms;
+}
+
+.simple-timeline-card:hover .simple-timeline-icon svg {
+  transform: translateX(0) scale(1.04);
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.8));
+}
+
+.simple-timeline-card:hover {
+  transform: translateY(-4px);
+}
+
+.simple-timeline-card {
+  transition: transform 420ms cubic-bezier(.22, .9, .28, 1);
+}
+
+/* Love Story timeline: very thin, light center line, no dots */
+.love-story-timeline .timeline-line-stroke {
+  stroke-width: 0.1;
+  stroke: rgba(255, 255, 255, 0.4);
+}
+
+.love-story-timeline .simple-timeline-dot {
+  display: none;
+}
+
+/* Smooth reveal for Love Story cards */
+.love-story-timeline .simple-timeline-item {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 600ms cubic-bezier(.22, .9, .28, 1),
+    transform 600ms cubic-bezier(.22, .9, .28, 1);
+}
+
+.love-story-timeline .simple-timeline-item.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Premium horizontal album gallery */
+.album-simple-section {
+  background: #ffffff;
+}
+
+.album-simple-carousel {
+  position: relative;
+}
+
+.album-simple-viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  /* 40px approx */
+  padding-block: 0.5rem 1.5rem;
+  padding-inline: min(5vw, 3rem);
+  width: 100%;
+  margin-inline: auto;
+  perspective: 1200px;
+}
+
+/* Hide scrollbar for album viewport (keep scroll functional) */
+.album-simple-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.album-simple-viewport {
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.album-simple-track {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  /* keep equal spacing */
+}
+
+.album-simple-card {
+  position: relative;
+  scroll-snap-align: center;
+  width: min(320px, 26vw);
+  aspect-ratio: 3 / 4;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+  transform-origin: center center;
+  transition:
+    transform 520ms cubic-bezier(.22, .61, .36, 1),
+    opacity 520ms cubic-bezier(.22, .61, .36, 1),
+    box-shadow 520ms cubic-bezier(.22, .61, .36, 1),
+    filter 520ms cubic-bezier(.22, .61, .36, 1);
+  opacity: 0.9;
+}
+
+.album-simple-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.album-simple-card--center {
+  opacity: 1;
+  transform: scale(1) translateZ(0) rotateY(0deg);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.26);
+  filter: brightness(1.05);
+}
+
+.album-simple-card--side {
+  opacity: 0.75;
+  transform: scale(0.92) translateZ(-40px) rotateY(var(--tilt, 0deg));
+}
+
+.album-simple-card:hover {
+  transform: translateY(-6px) scale(1.02) rotateY(0deg);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .album-simple-viewport {
+    gap: 1.75rem;
+    padding-inline: 1.25rem;
+  }
+
+  .album-simple-card {
+    width: min(320px, 82vw);
+  }
+}
+
+/* On large screens, show exactly three album cards per view */
+@media (min-width: 1024px) {
+  .album-simple-card {
+    width: calc((100% - 2 * 2.5rem) / 3);
+    /* 3 cards + 2 gaps */
+  }
+}
+
+/* Schedule timeline: thin, slightly softer center line */
+.schedule-timeline .timeline-line-stroke {
+  stroke-width: 0.1;
+  stroke: rgba(255, 255, 255, 0.65);
+}
+
+@media (min-width: 768px) {
+  .simple-timeline-dot {
+    left: 1px;
+  }
+}
+
+/* On small screens, make Love Story line a bit stronger so it's visible */
+@media (max-width: 640px) {
+  .love-story-timeline .timeline-line-stroke {
+    stroke-width: 0.1;
+    stroke: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .anim-fadeUp,
+  .anim-fadeUp-delay,
+  .anim-fadeUp-more,
+  .anim-fadeIn,
+  .anim-fadeIn-slow,
+  .anim-bgZoom {
+    animation: none !important;
+  }
+
+  .reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
