@@ -61,15 +61,45 @@
     const minutesEl = document.querySelector('[data-countdown-minutes]');
     const secondsEl = document.querySelector('[data-countdown-seconds]');
 
+    const setFlipValue = (el, nextValue) => {
+        if (!el) return;
+        const flip = el.querySelector('.lux-flip');
+        const front = el.querySelector('.lux-flip-front');
+        const back = el.querySelector('.lux-flip-back');
+        if (!flip || !front || !back) {
+            el.textContent = nextValue;
+            return;
+        }
+
+        const currentValue = (front.textContent || '').trim();
+        if (currentValue === nextValue) return;
+
+        back.textContent = nextValue;
+        flip.classList.remove('is-ticking');
+        void flip.offsetWidth;
+        flip.classList.add('is-ticking');
+
+        const onEnd = () => {
+            front.textContent = nextValue;
+            back.textContent = nextValue;
+            flip.classList.remove('is-ticking');
+            flip.removeEventListener('animationend', onEnd);
+        };
+
+        flip.addEventListener('animationend', onEnd);
+    };
+
     if (daysEl && hoursEl && minutesEl && secondsEl) {
+        const pad = (n) => String(n).padStart(2, '0');
+
         const updateCountdown = () => {
             const now = new Date();
             const diff = targetDate.getTime() - now.getTime();
             if (diff <= 0) {
-                daysEl.textContent = '00';
-                hoursEl.textContent = '00';
-                minutesEl.textContent = '00';
-                secondsEl.textContent = '00';
+                setFlipValue(daysEl, '00');
+                setFlipValue(hoursEl, '00');
+                setFlipValue(minutesEl, '00');
+                setFlipValue(secondsEl, '00');
                 return;
             }
             const totalSeconds = Math.floor(diff / 1000);
@@ -78,15 +108,28 @@
             const minutes = Math.floor((totalSeconds / 60) % 60);
             const seconds = Math.floor(totalSeconds % 60);
 
-            const pad = (n) => String(n).padStart(2, '0');
-            daysEl.textContent = pad(days);
-            hoursEl.textContent = pad(hours);
-            minutesEl.textContent = pad(minutes);
-            secondsEl.textContent = pad(seconds);
+            setFlipValue(daysEl, pad(days));
+            setFlipValue(hoursEl, pad(hours));
+            setFlipValue(minutesEl, pad(minutes));
+            setFlipValue(secondsEl, pad(seconds));
         };
 
         updateCountdown();
         setInterval(updateCountdown, 1000);
+
+        const countdownCardsRoot = document.querySelector('[data-countdown-cards]');
+        const countdownCards = countdownCardsRoot ? Array.from(countdownCardsRoot.querySelectorAll('[data-countdown-card]')) : [];
+        if (countdownCards.length) {
+            const pulse = () => {
+                countdownCards.forEach(card => card.classList.add('pulse-glow'));
+                window.setTimeout(() => {
+                    countdownCards.forEach(card => card.classList.remove('pulse-glow'));
+                }, 2400);
+            };
+
+            window.setTimeout(pulse, 2200);
+            setInterval(pulse, 10000);
+        }
     }
 
     // Premium horizontal gallery: highlight center card on scroll

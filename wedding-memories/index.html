@@ -101,38 +101,33 @@
 </head>
 
 <body class="antialiased text-deepred-700 bg-white">
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black/5">
-    <!-- Crisp background image layer (kept sharp so blur occurs only through the glass panel) -->
+  <section class="relative min-h-screen overflow-hidden bg-black/5">
     <div class="absolute inset-0 anim-fadeIn-slow anim-bgZoom" data-parallax="0.04"
-      style="background-image:url('./assets/Bg-image.jpg'); background-size:cover; background-position:center">
+      style="background-image:url('./assets/MKRV-041.PNG'); background-size:cover; background-position:center">
     </div>
-    <!-- Subtle vignette for readability -->
     <div
-      class="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_70%_at_50%_50%,rgba(0,0,0,0.18),transparent_60%)] anim-fadeIn-slow [animation-delay:150ms]">
+      class="pointer-events-none hidden sm:block absolute inset-y-0 left-0 w-[68%] sm:w-[44%] lg:w-[36%] max-w-[420px] bg-gradient-to-r from-black/40 via-black/14 to-transparent anim-fadeIn-slow">
     </div>
 
-    <!-- Centered Frosted Glass Panel -->
-    <div class="relative z-10 container mx-auto px-4 sm:px-6">
-      <div class="mx-auto max-w-3xl">
-        <div
-          class="glass anim-fadeUp mx-auto rounded-[28px] border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150">
-          <!-- Panel inner glow ring for premium vibe -->
-          <div class="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-white/10"></div>
-          <div class="relative px-8 py-12 sm:px-14 sm:py-16 text-center reveal">
-            <h1
-              class="font-serif text-white tracking-[0.06em] font-bold leading-tight text-4xl sm:text-6xl md:text-7xl [text-shadow:0_6px_32px_rgba(0,0,0,0.48)]"
-              data-stagger>
-              <span class="block text-3xl sm:text-5xl md:text-6xl">MUTHUKUMAR</span>
-              <span class="block leading-none text-5xl sm:text-7xl md:text-8xl">&</span>
-              <span class="block text-3xl sm:text-5xl md:text-6xl">RAJAVALLI</span>
-            </h1>
-            <div class="mx-auto mt-5 flex w-full max-w-[220px] items-center justify-center gap-2" data-stagger>
-              <span class="h-px flex-1 bg-gradient-to-r from-white/0 via-white/80 to-white/0"></span>
+    <div class="relative z-10 flex min-h-screen items-center">
+      <div class="container mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        <div class="max-w-3xl mx-auto sm:mx-0 pt-10 sm:pt-10">
+          <div class="reveal text-center sm:text-left">
+            <p class="text-[11px] sm:text-xs tracking-[0.44em] uppercase text-white/85" data-stagger>
+              The wedding of
+            </p>
+
+            <div class="relative mt-4">
+              <h1
+                class="font-sans font-extrabold text-white leading-[0.9] tracking-[-0.02em] text-5xl sm:text-6xl md:text-7xl lg:text-8xl [text-shadow:0_10px_40px_rgba(0,0,0,0.55)]"
+                data-stagger>
+                <span class="inline sm:block">Muthukumar</span>
+                <span
+                  class="inline mx-3 sm:mx-0 sm:block font-serif italic font-semibold text-white/90 leading-none text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+                  aria-hidden="false">&</span>
+                <span class="inline sm:block">Rajavalli</span>
+              </h1>
             </div>
-            <div class="mx-auto mt-1 flex w-full max-w-[160px] items-center justify-center" data-stagger>
-              <span class="h-[1px] w-2/3 bg-gold-400/70"></span>
-            </div>
-           
           </div>
         </div>
       </div>
@@ -158,7 +153,7 @@
             </div>
             <div
               class="relative rounded-3xl border border-white/30 bg-white shadow-soft overflow-hidden reveal reveal-left">
-              <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=1600&auto=format&fit=crop"
+              <img src="./assets/MKRV_025.avif"
                 alt="Bride portrait" class="w-full h-80 sm:h-96 object-cover anim-fadeIn-slow" data-stagger>
               <div class="p-6 sm:p-8 text-center">
                 <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.02em] text-deepred-700" data-stagger>Rajavalli K
@@ -177,7 +172,7 @@
             </div>
             <div
               class="relative rounded-3xl border border-white/30 bg-white shadow-soft overflow-hidden reveal reveal-right">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop"
+              <img src="./assets/groom-pic.PNG"
                 alt="Groom portrait" class="w-full h-80 sm:h-96 object-cover anim-fadeIn-slow" data-stagger>
               <div class="p-6 sm:p-8 text-center">
                 <h3 class="font-serif text-2xl sm:text-3xl tracking-[0.02em] text-deepred-700" data-stagger>Muthukumar M
@@ -197,118 +192,137 @@
   <section class="relative py-16 sm:py-20 bg-roseveil/60">
     <div class="container relative mx-auto px-4 sm:px-6">
       <div
-        class="relative max-w-4xl mx-auto rounded-[40px] border border-roseveil bg-white shadow-soft overflow-hidden anim-fadeUp">
-        <div
-          class="absolute -inset-10 pointer-events-none bg-[radial-gradient(70%_120%_at_50%_0%,rgba(244,215,138,0.24),transparent_70%)]">
-        </div>
+        class="relative max-w-4xl mx-auto rounded-[40px] border border-roseveil/70 bg-[#FFF9F1] shadow-soft overflow-hidden anim-fadeUp">
+        <div class="lux-countdown-glow pointer-events-none absolute inset-0"></div>
         <div class="relative px-6 sm:px-10 py-10 sm:py-12 text-center text-deepred-700">
-          <div class="pointer-events-none absolute inset-0 -z-10"></div>
           <h2 class="font-serif text-xl sm:text-2xl tracking-[0.04em] text-deepred-700 mb-2">
             Counting Down to Forever
           </h2>
-          <p class="text-[11px] sm:text-xs tracking-[0.4em] uppercase text-deepred-700/70 mb-4 font-sans">
+          <p class="text-[11px] sm:text-xs tracking-[0.4em] uppercase text-deepred-700/70 mb-6 font-sans">
             We are starting the countdown
           </p>
-          <div class="flex items-center justify-center mb-8">
-            <div
-              class="h-8 w-8 rounded-full bg-roseveil flex items-center justify-center shadow-soft heart-pulse border border-deepred-700/15">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 text-deepred-600">
+
+          <div class="lux-countdown" data-countdown>
+            <div class="lux-countdown-heart" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="lux-heart-icon">
                 <path fill="currentColor"
                   d="M12 20.25s-1.39-1.08-2.77-2.35C6.4 15.36 4 13.16 4 9.97 4 7.74 5.68 6 7.82 6c1.3 0 2.4.67 3.03 1.7C11.78 6.67 12.88 6 14.18 6C16.32 6 18 7.74 18 9.97c0 3.19-2.4 5.39-5.23 7.93C13.39 19.17 12 20.25 12 20.25z" />
               </svg>
             </div>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6" data-countdown>
-            <div class="rounded-2xl bg-white border border-roseveil px-4 py-4 sm:px-5 sm:py-5 shadow-soft">
-              <div class="font-serif text-3xl sm:text-4xl font-semibold tracking-[0.22em] text-deepred-700"
-                data-countdown-days>00</div>
-              <div class="mt-1 text-[11px] sm:text-xs tracking-[0.32em] uppercase text-deepred-700/65">Days</div>
-            </div>
-            <div class="rounded-2xl bg-white border border-roseveil px-4 py-4 sm:px-5 sm:py-5 shadow-soft">
-              <div class="font-serif text-3xl sm:text-4xl font-semibold tracking-[0.22em] text-deepred-700"
-                data-countdown-hours>00</div>
-              <div class="mt-1 text-[11px] sm:text-xs tracking-[0.32em] uppercase text-deepred-700/65">Hours</div>
-            </div>
-            <div class="rounded-2xl bg-white border border-roseveil px-4 py-4 sm:px-5 sm:py-5 shadow-soft">
-              <div class="font-serif text-3xl sm:text-4xl font-semibold tracking-[0.22em] text-deepred-700"
-                data-countdown-minutes>00</div>
-              <div class="mt-1 text-[11px] sm:text-xs tracking-[0.32em] uppercase text-deepred-700/65">Minutes</div>
-            </div>
-            <div class="rounded-2xl bg-white border border-roseveil px-4 py-4 sm:px-5 sm:py-5 shadow-soft">
-              <div class="font-serif text-3xl sm:text-4xl font-semibold tracking-[0.22em] text-deepred-700"
-                data-countdown-seconds>00</div>
-              <div class="mt-1 text-[11px] sm:text-xs tracking-[0.32em] uppercase text-deepred-700/65">Seconds</div>
+
+            <div class="lux-countdown-cards reveal" data-countdown-cards>
+              <div class="lux-countdown-card" data-countdown-card>
+                <div class="lux-countdown-value" data-countdown-days>
+                  <span class="lux-flip">
+                    <span class="lux-flip-face lux-flip-front">00</span>
+                    <span class="lux-flip-face lux-flip-back">00</span>
+                  </span>
+                </div>
+                <div class="lux-countdown-label">DAYS</div>
+              </div>
+
+              <div class="lux-countdown-card" data-countdown-card>
+                <div class="lux-countdown-value" data-countdown-hours>
+                  <span class="lux-flip">
+                    <span class="lux-flip-face lux-flip-front">00</span>
+                    <span class="lux-flip-face lux-flip-back">00</span>
+                  </span>
+                </div>
+                <div class="lux-countdown-label">HOURS</div>
+              </div>
+
+              <div class="lux-countdown-card" data-countdown-card>
+                <div class="lux-countdown-value" data-countdown-minutes>
+                  <span class="lux-flip">
+                    <span class="lux-flip-face lux-flip-front">00</span>
+                    <span class="lux-flip-face lux-flip-back">00</span>
+                  </span>
+                </div>
+                <div class="lux-countdown-label">MINUTES</div>
+              </div>
+
+              <div class="lux-countdown-card" data-countdown-card>
+                <div class="lux-countdown-value" data-countdown-seconds>
+                  <span class="lux-flip">
+                    <span class="lux-flip-face lux-flip-front">00</span>
+                    <span class="lux-flip-face lux-flip-back">00</span>
+                  </span>
+                </div>
+                <div class="lux-countdown-label">SECONDS</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="relative py-16 sm:py-24 bg-roseveil/60">
+
+  <section class="relative py-16 sm:py-20 bg-roseveil/60 cinematic-event-section">
+    <div class="cinematic-event-vignette pointer-events-none"></div>
     <div class="container mx-auto px-4 sm:px-6">
-      <div
-        class="max-w-4xl mx-auto rounded-[32px] bg-white shadow-soft border border-roseveil/80 px-4 sm:px-10 lg:px-16 py-10 sm:py-14 reveal">
-        <div class="flex flex-col items-center text-center">
-          <div
-            class="mb-8 sm:mb-10 w-52 sm:w-64 md:w-72 aspect-[3/4] rounded-t-[60%] rounded-b-[32px] overflow-hidden bg-roseveil/80 border border-roseveil shadow-soft">
-            <img src="./assets/img2.png" alt="Wedding reception" class="w-full h-full object-cover">
-          </div>
-          <h1 class="font-serif text-2xl sm:text-3xl tracking-[0.03em] text-deepred-700" data-stagger>Wedding Reception
-          </h1>
-          <p class="mt-2 text-xs sm:text-sm tracking-[0.16em] uppercase text-deepred-700/60" data-stagger>
-            Rasi Mahal, Sivakasi
-          </p>
-          <p class="mt-3 text-[11px] sm:text-xs tracking-[0.26em] uppercase font-semibold text-deepred-700"
-            data-stagger>
-            At 06:30 PM
-          </p>
-          <div class="mt-10 w-full max-w-2xl" data-stagger>
-            <div
-              class="flex items-center justify-between gap-4 text-[12px] sm:text-sm tracking-[0.18em] uppercase text-deepred-700/75">
-              <div class="flex-1 flex items-center gap-3">
-                <span class="hidden sm:block h-px flex-1 bg-deepred-700/20"></span>
-                <span class="font-medium whitespace-nowrap">Friday</span>
-              </div>
-              <div class="flex items-baseline gap-2 mx-auto">
-                <span
-                  class="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[0.12em] text-deepred-700">20</span>
-                <span class="font-serif text-2xl sm:text-3xl tracking-[0.4em] text-deepred-700/70">/</span>
-                <span class="font-serif text-3xl sm:text-4xl font-semibold tracking-[0.18em] text-deepred-700">02</span>
-              </div>
-              <div class="flex-1 flex items-center gap-3 justify-end">
-                <span class="font-medium whitespace-nowrap">2026</span>
-                <span class="hidden sm:block h-px flex-1 bg-deepred-700/20"></span>
-              </div>
+      <div class="cinematic-event-wrap">
+        <div class="cinematic-event-particles" aria-hidden="true">
+          <span class="cinematic-particle particle-soft" style="--sx:-48px; --dur: 12s;"></span>
+          <span class="cinematic-particle particle-soft" style="--sx:56px; --dur: 14s;"></span>
+          <span class="cinematic-particle particle-soft" style="--sx:-10px; --dur: 16s;"></span>
+          <span class="cinematic-particle particle-soft" style="--sx:28px; --dur: 18s;"></span>
+          <span class="cinematic-particle particle-soft" style="--sx:-74px; --dur: 20s;"></span>
+        </div>
+
+        <article class="cinematic-event-card reveal">
+          <div class="cinematic-event-media" data-stagger>
+            <div class="cinematic-event-arch">
+              <img src="./assets/MKRV_003.avif" alt="Wedding reception" class="cinematic-event-image">
             </div>
           </div>
-          <p class="mt-4 text-[11px] sm:text-xs text-deepred-700/70 font-serif italic" data-stagger>
-            According to Tamil Calendar
-          </p>
-          <div class="mt-8 flex items-center justify-center gap-7" data-stagger>
-            <button type="button"
-              class="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-deepred-700/15 bg-white shadow-[0_8px_22px_rgba(101,5,19,0.15)] hover:border-deepred-700/40 hover:shadow-[0_10px_26px_rgba(101,5,19,0.22)] transition-all duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 text-deepred-700/80">
-                <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6.5 3.75h-1A1.75 1.75 0 0 0 3.75 5.5v1.87c0 6.67 5.41 12.38 12 12.38h1.75a1.75 1.75 0 0 0 1.75-1.75v-2.6a1 1 0 0 0-.72-.96l-3.4-1.03a1 1 0 0 0-1.02.26l-.96.98a.9.9 0 0 1-.96.23c-1.8-.63-3.4-2.2-4.07-4.03a.9.9 0 0 1 .2-.96l.92-.92a1 1 0 0 0 .25-1.02L9.7 4.47a1 1 0 0 0-.96-.72z" />
-              </svg>
-            </button>
-            <button type="button"
-              class="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-deepred-700/15 bg-white shadow-[0_8px_22px_rgba(101,5,19,0.15)] hover:border-deepred-700/40 hover:shadow-[0_10px_26px_rgba(101,5,19,0.22)] transition-all duration-200">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4 text-deepred-700/80">
-                <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 3.25a6.5 6.5 0 0 0-6.5 6.5c0 4.06 3.37 7.86 5.62 9.83a1.4 1.4 0 0 0 1.76 0c2.25-1.97 5.62-5.77 5.62-9.83A6.5 6.5 0 0 0 12 3.25zm0 3.5a3 3 0 1 1 0 6.01a3 3 0 0 1 0-6.01z" />
-              </svg>
-            </button>
+
+          <div class="cinematic-event-body">
+            <h1 class="cinematic-event-title" data-stagger>Wedding Reception</h1>
+            <p class="cinematic-event-location" data-stagger>Rasi Mahal, Sivakasi</p>
+            <div class="cinematic-event-meta" data-stagger>
+              <span class="cinematic-event-time">At 06:30 PM</span>
+            </div>
+
+            <div class="cinematic-event-date" data-stagger>
+              <span class="cinematic-event-divider" aria-hidden="true"></span>
+              <div class="cinematic-event-date-core">
+                <span class="cinematic-event-weekday">Friday</span>
+                <span class="cinematic-event-numerals">
+                  <span class="cinematic-event-day">20</span>
+                  <span class="cinematic-event-slash">/</span>
+                  <span class="cinematic-event-month">02</span>
+                </span>
+                <span class="cinematic-event-year">2026</span>
+              </div>
+              <span class="cinematic-event-divider" aria-hidden="true"></span>
+            </div>
+
+            <p class="cinematic-event-note" data-stagger>According to Tamil Calendar</p>
+
+            <div class="cinematic-event-actions" data-stagger>
+              <button type="button" class="cinematic-event-btn" aria-label="Call">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4">
+                  <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.5 3.75h-1A1.75 1.75 0 0 0 3.75 5.5v1.87c0 6.67 5.41 12.38 12 12.38h1.75a1.75 1.75 0 0 0 1.75-1.75v-2.6a1 1 0 0 0-.72-.96l-3.4-1.03a1 1 0 0 0-1.02.26l-.96.98a.9.9 0 0 1-.96.23c-1.8-.63-3.4-2.2-4.07-4.03a.9.9 0 0 1 .2-.96l.92-.92a1 1 0 0 0 .25-1.02L9.7 4.47a1 1 0 0 0-.96-.72z" />
+                </svg>
+              </button>
+              <button type="button" class="cinematic-event-btn" aria-label="Location">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4">
+                  <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 3.25a6.5 6.5 0 0 0-6.5 6.5c0 4.06 3.37 7.86 5.62 9.83a1.4 1.4 0 0 0 1.76 0c2.25-1.97 5.62-5.77 5.62-9.83A6.5 6.5 0 0 0 12 3.25zm0 3.5a3 3 0 1 1 0 6.01a3 3 0 0 1 0-6.01z" />
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
   <section class="relative py-20 sm:py-24 bg-black/5 overflow-hidden">
     <div class="absolute inset-0 anim-bgZoom"
-      style="background-image:url('./assets/loveStroyBg.jpg'); background-size:cover; background-position:center; filter:blur(4px);">
+      style="background-image:url('./assets/timeliine-bg.jpg'); background-size:cover; background-position:center;">
     </div>
     <div class="absolute inset-0 bg-black/55"></div>
     <div class="relative container mx-auto px-4 sm:px-6">
@@ -329,7 +343,7 @@
                 class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
                 <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop"
+                    src="./assets/MKRV_001.avif"
                     alt="First meeting" class="w-full h-full object-cover">
                 </div>
               </div>
@@ -360,7 +374,7 @@
                 class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
                 <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=1200&auto=format&fit=crop"
+                    src="./assets/MKRV_008.avif"
                     alt="First date" class="w-full h-full object-cover">
                 </div>
               </div>
@@ -372,7 +386,7 @@
               <div
                 class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
                 <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1544829728-e5cb9eed0309?q=80&w=1200&auto=format&fit=crop"
+                  <img src="./assets/MKRV_038.avif"
                     alt="Officially together" class="w-full h-full object-cover">
                 </div>
               </div>
@@ -402,7 +416,7 @@
                 class="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
                 <div class="h-60 sm:h-72 md:h-80 overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop"
+                    src="./assets/MKRV_022.avif"
                     alt="Families meet" class="w-full h-full object-cover">
                 </div>
               </div>
@@ -723,6 +737,67 @@
   </section>
   <!-- Custom JavaScript -->
   <script src="script.js"></script>
+
+  <audio id="bg-music" preload="metadata" loop>
+    <source src="./assets/Idicha-Pacharisi.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="bg-music-toggle" type="button"
+    class="fixed bottom-5 right-5 z-50 inline-flex items-center rounded-full bg-white/90 p-3 shadow-soft border border-deepred-700/10 text-deepred-700 backdrop-blur focus:outline-none focus:ring-2 focus:ring-gold-400"
+    aria-label="Unmute background music">
+    <span id="bg-music-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5">
+        <path fill="currentColor" d="M11 5L6 9H3v6h3l5 4V5z" />
+        <path fill="currentColor" d="M16.5 12a3.5 3.5 0 0 0-2-3.15v6.3a3.5 3.5 0 0 0 2-3.15z" />
+        <path fill="currentColor" d="M14.5 3.97v2.2a6.5 6.5 0 0 1 0 11.66v2.2a8.5 8.5 0 0 0 0-16.06z" />
+      </svg>
+    </span>
+  </button>
+
+  <script>
+    (function () {
+      const audio = document.getElementById('bg-music');
+      const btn = document.getElementById('bg-music-toggle');
+      const icon = document.getElementById('bg-music-icon');
+
+      if (!audio || !btn || !icon) return;
+
+      const setErrorState = (message) => {
+        btn.setAttribute('aria-label', message);
+        icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg>';
+      };
+
+      const render = () => {
+        const muted = !!audio.muted;
+        btn.setAttribute('aria-label', muted ? 'Unmute background music' : 'Mute background music');
+        icon.innerHTML = muted
+          ? '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5"><path fill="currentColor" d="M11 5L6 9H3v6h3l5 4V5z" /><path fill="currentColor" d="M16.5 8.5l4 4l-1.4 1.4l-4-4z" /><path fill="currentColor" d="M20.5 8.5l-4 4l-1.4-1.4l4-4z" /></svg>'
+          : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5"><path fill="currentColor" d="M11 5L6 9H3v6h3l5 4V5z" /><path fill="currentColor" d="M16.5 12a3.5 3.5 0 0 0-2-3.15v6.3a3.5 3.5 0 0 0 2-3.15z" /><path fill="currentColor" d="M14.5 3.97v2.2a6.5 6.5 0 0 1 0 11.66v2.2a8.5 8.5 0 0 0 0-16.06z" /></svg>';
+      };
+
+      audio.volume = 0.6;
+      audio.muted = false;
+      render();
+
+      btn.addEventListener('click', async () => {
+        try {
+          if (audio.paused) {
+            audio.load();
+            await audio.play();
+          }
+          audio.muted = !audio.muted;
+          render();
+        } catch (e) {
+          setErrorState('Music blocked');
+        }
+      });
+
+      audio.addEventListener('play', render);
+      audio.addEventListener('pause', render);
+      audio.addEventListener('ended', render);
+      audio.addEventListener('error', () => setErrorState('Music blocked'));
+    })();
+  </script>
 </body>
 
 </html>
