@@ -1,0 +1,256 @@
+/* Extra visual refinements using utility-friendly CSS variables */
+.glass {
+  backdrop-filter: saturate(120%) blur(18px);
+}
+
+.mask-wave-top {
+  -webkit-mask: radial-gradient(120% 60% at 50% 120%, transparent 58%, black 60%);
+  mask: radial-gradient(120% 60% at 50% 120%, transparent 58%, black 60%);
+}
+
+.mask-wave-bottom {
+  -webkit-mask: radial-gradient(120% 60% at 50% -20%, transparent 58%, black 60%);
+  mask: radial-gradient(120% 60% at 50% -20%, transparent 58%, black 60%);
+}
+
+/* Minimal intro animations */
+@keyframes waveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-40%) rotate(-1deg)
+  }
+
+  60% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0)
+  }
+}
+
+@keyframes waveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40%) rotate(1deg)
+  }
+
+  60% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0)
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bgZoom {
+  from {
+    transform: scale(1.05);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes heartPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.fade-in-slow {
+  animation: fadeIn 1.2s ease-out;
+}
+
+.fade-up {
+  animation: fadeUp 1s ease-out;
+}
+
+.bg-zoom {
+  animation: bgZoom 8s ease-out forwards;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.heart-pulse {
+  animation: heartPulse 2s ease-in-out infinite;
+}
+
+/* Timeline Styles */
+.simple-timeline-line {
+  position: relative;
+}
+
+.timeline-line-stroke {
+  stroke: rgba(244, 215, 138, 0.4);
+  stroke-width: 1;
+}
+
+.simple-timeline-item {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.simple-timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.simple-timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.simple-timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.simple-timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.simple-timeline-item:nth-child(5) { animation-delay: 0.5s; }
+.simple-timeline-item:nth-child(6) { animation-delay: 0.6s; }
+.simple-timeline-item:nth-child(7) { animation-delay: 0.7s; }
+.simple-timeline-item:nth-child(8) { animation-delay: 0.8s; }
+.simple-timeline-item:nth-child(9) { animation-delay: 0.9s; }
+.simple-timeline-item:nth-child(10) { animation-delay: 1.0s; }
+
+.simple-timeline-axis {
+  position: relative;
+}
+
+.simple-timeline-dot {
+  width: 12px;
+  height: 12px;
+  background: #F4D78A;
+  border: 2px solid rgba(244, 215, 138, 0.3);
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+.simple-timeline-dot::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: rgba(244, 215, 138, 0.2);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.simple-timeline-card {
+  transition: transform 0.3s ease;
+}
+
+.simple-timeline-card:hover {
+  transform: translateX(5px);
+}
+
+/* Album Carousel Styles */
+.album-simple-viewport {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.album-simple-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.album-simple-card {
+  flex: 0 0 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album-simple-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.album-simple-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@keyframes countdownFlipIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) rotateX(70deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+.countdown-digit {
+  display: inline-block;
+  transform-origin: 50% 0%;
+  animation: countdownFlipIn 420ms ease-out;
+  will-change: transform, opacity;
+}
+
+.countdown-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.countdown-card::before {
+  content: '';
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(120deg, transparent, rgba(244, 215, 138, 0.35), transparent);
+  transform: translateX(-30%) rotate(12deg);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.countdown-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(101, 5, 19, 0.14);
+}
+
+.countdown-card:hover::before {
+  opacity: 1;
+}
