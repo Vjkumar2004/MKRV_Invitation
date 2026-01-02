@@ -14,66 +14,66 @@ const LoveStory: React.FC = () => {
       year: '2020',
       title: 'First Meeting',
       description: 'Met through a shared best friend and felt an instant connection.',
-      image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop',
+      image: '/MKRV_038.avif',
       imageFirst: true
     },
     {
       year: '2020',
       title: 'First Date',
       description: 'Coffee turned into long conversations and endless laughter.',
-      image: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=1200&auto=format&fit=crop'
+      image: '/MKRV_022.avif'
     },
     {
       year: '2021',
       title: 'Officially Together',
       description: 'Promises were made and the journey of us truly began.',
-      image: 'https://images.unsplash.com/photo-1544829728-e5cb9eed0309?q=80&w=1200&auto=format&fit=crop',
+      image: '/MKRV_019.avif',
       imageFirst: true
     },
     {
       year: '2021',
       title: 'Families United',
       description: 'Two families came together with blessings and happy tears.',
-      image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop'
+      image: '/MKRV_035.avif'
     },
     {
       year: '2022',
       title: 'First Getaway',
       description: 'A memorable trip filled with sunsets, photos and shared dreams.',
-      image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop',
+      image: '/MKRV_013.avif',
       imageFirst: true
     },
     {
       year: '2022',
       title: 'The Proposal',
       description: 'A heartfelt question, a joyful yes and happy tears all around.',
-      image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop'
+      image: '/MKRV_006.avif'
     },
     {
       year: '2023',
       title: 'Ring Ceremony',
-      description: 'Exchanging rings in front of the people who mean the most.',
-      image: 'https://images.unsplash.com/photo-1529636443204-55f4685c9ddd?q=80&w=1200&auto=format&fit=crop',
+      description: 'Exchanging rings in front of people who mean the most.',
+      image: '/MKRV_038.avif',
       imageFirst: true
     },
     {
       year: '2024',
       title: 'Planning Together',
       description: 'Late-night calls, checklists and excitement for the big day.',
-      image: 'https://images.unsplash.com/photo-1518600506278-4e8ef466b810?q=80&w=1200&auto=format&fit=crop'
+      image: '/MKRV_022.avif'
     },
     {
       year: '2025',
       title: 'Pre-Wedding Shoot',
       description: 'Capturing laughter, stolen glances and quiet moments together.',
-      image: 'https://images.unsplash.com/photo-1530276372020-704cde3099c4?q=80&w=1200&auto=format&fit=crop',
+      image: '/MKRV_019.avif',
       imageFirst: true
     },
     {
       year: '2026',
       title: 'Wedding Day',
       description: 'The day two hearts, two families and countless memories became one.',
-      image: 'https://images.unsplash.com/photo-1529957711660-c541ce4e0a33?q=80&w=1200&auto=format&fit=crop'
+      image: '/MKRV_035.avif'
     }
   ];
 
@@ -81,9 +81,11 @@ const LoveStory: React.FC = () => {
     <section className="relative py-20 sm:py-24 bg-black/5 overflow-hidden">
       <div className="absolute inset-0 bg-zoom"
         style={{
-          backgroundImage: "url('./assets/loveStroyBg.jpg')",
+          backgroundImage: "url('/MKRV_039.avif')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '100vh',
           filter: 'blur(4px)'
         }}></div>
       <div className="absolute inset-0 bg-black/55"></div>
@@ -94,8 +96,8 @@ const LoveStory: React.FC = () => {
         </div>
         <div className="simple-timeline-line love-story-timeline reveal">
           <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 flex justify-center">
-            <svg className="h-full" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true">
-              <line className="timeline-line-stroke" x1="1" y1="0" x2="1" y2="100" />
+            <svg className="h-full" viewBox="0 0 0.2 100" preserveAspectRatio="none" aria-hidden="true">
+              <line className="timeline-line-stroke" x1="0.1" y1="0" x2="0.1" y2="100" strokeWidth="0.1" />
             </svg>
           </div>
           <div className="space-y-20 sm:space-y-24 relative">
