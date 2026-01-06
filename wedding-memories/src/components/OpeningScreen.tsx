@@ -62,6 +62,14 @@ const OpeningScreen: React.FC<OpeningScreenProps> = ({ onOpen, isPlaying = false
           <p className="romantic-text">We are tying the knot and would love for you to be part of our special day.</p>
           <p className="subtitle">Wedding Invitation</p>
         </div>
+        
+        <button 
+          className="open-button"
+          onClick={handleOpenInvitation}
+          aria-label="Open Wedding Invitation"
+        >
+          Open Invitation
+        </button>
       </div>
     </div>
   );
