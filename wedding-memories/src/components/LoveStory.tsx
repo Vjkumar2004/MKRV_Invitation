@@ -11,136 +11,195 @@ interface StoryItem {
 const LoveStory: React.FC = () => {
   const storyItems: StoryItem[] = [
     {
-      year: '2020',
-      title: 'First Meeting',
-      description: 'Met through a shared best friend and felt an instant connection.',
-      image: '/MKRV_038.avif',
+      year: '2015',
+      title: 'Where It All Began',
+      description: 'Two strangers, one unexpected connection. Our story quietly began here.',
+      image: '/timeline 1.avif',
       imageFirst: true
     },
     {
+      year: '2015',
+      title: 'First Conversations',
+      description: 'From simple talks to endless conversations… without knowing, hearts started connecting.',
+      image: '/timeline 2.avif'
+    },
+    {
+      year: '2016',
+      title: 'First Photo Together',
+      description: 'Our first captured memory – shy smiles, real feelings, and a lot of hope.',
+      image: '/timeline 3.avif',
+      imageFirst: true
+    },
+    {
+      year: '2017',
+      title: 'Growing Closer',
+      description: 'Days turned into years, and friendship slowly bloomed into love.',
+      image: '/timeline 5.avif'
+    },
+    {
+      year: '2018',
+      title: 'Long Talks & Laughter',
+      description: 'Late-night talks, silly laughs, and memories we\'ll cherish forever.',
+      image: '/timeline 6.avif',
+      imageFirst: true
+    },
+    {
+      year: '2019',
+      title: 'Through Ups & Downs',
+      description: 'Not every chapter was easy, but every challenge made us stronger together.',
+      image: '/timeline 7.png'
+    },
+    {
       year: '2020',
-      title: 'First Date',
-      description: 'Coffee turned into long conversations and endless laughter.',
-      image: '/MKRV_022.avif'
+      title: 'Choosing Each Other',
+      description: 'Through changes and time, we chose each other again and again.',
+      image: '/timeline 8.avif',
+      imageFirst: true
     },
     {
       year: '2021',
-      title: 'Officially Together',
-      description: 'Promises were made and the journey of us truly began.',
-      image: '/MKRV_019.avif',
-      imageFirst: true
-    },
-    {
-      year: '2021',
-      title: 'Families United',
-      description: 'Two families came together with blessings and happy tears.',
-      image: '/MKRV_035.avif'
+      title: 'Love That Stayed',
+      description: 'Years passed, but our love stayed constant — deeper, stronger, and truer.',
+      image: '/timeline 9.avif'
     },
     {
       year: '2022',
-      title: 'First Getaway',
-      description: 'A memorable trip filled with sunsets, photos and shared dreams.',
-      image: '/MKRV_013.avif',
-      imageFirst: true
-    },
-    {
-      year: '2022',
-      title: 'The Proposal',
-      description: 'A heartfelt question, a joyful yes and happy tears all around.',
-      image: '/MKRV_006.avif'
-    },
-    {
-      year: '2023',
-      title: 'Ring Ceremony',
-      description: 'Exchanging rings in front of people who mean the most.',
-      image: '/MKRV_038.avif',
-      imageFirst: true
-    },
-    {
-      year: '2024',
-      title: 'Planning Together',
-      description: 'Late-night calls, checklists and excitement for the big day.',
-      image: '/MKRV_022.avif'
-    },
-    {
-      year: '2025',
-      title: 'Pre-Wedding Shoot',
-      description: 'Capturing laughter, stolen glances and quiet moments together.',
-      image: '/MKRV_019.avif',
+      title: 'Almost Forever',
+      description: 'From 2015 to forever — our love story is now ready for its next chapter.',
+      image: '/timeline 10.avif',
       imageFirst: true
     },
     {
       year: '2026',
-      title: 'Wedding Day',
-      description: 'The day two hearts, two families and countless memories became one.',
-      image: '/MKRV_035.avif'
+      title: 'The Beginning of Forever',
+      description: 'This is not the end of our story… it\'s just the beginning of forever.',
+      image: '/timeline 1.avif'
     }
   ];
 
   return (
-    <section className="relative py-20 sm:py-24 bg-black/5 overflow-hidden">
-      <div className="absolute inset-0 bg-zoom"
+    <section className="relative py-16 sm:py-24 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0"
         style={{
-          backgroundImage: "url('/MKRV_039.avif')",
+          backgroundImage: "url('/MKRV_008_compressed.avif')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          minHeight: '100vh',
-          filter: 'blur(4px)'
-        }}></div>
-      <div className="absolute inset-0 bg-black/55"></div>
+          filter: 'brightness(0.7)'
+        }}
+      ></div>
+      
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/5 to-black/10"></div>
+      
       <div className="relative container mx-auto px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center mb-10 sm:mb-14 reveal">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl tracking-[0.08em] text-white">Our Love Story</h2>
-          <p className="mt-3 text-xs sm:text-sm tracking-[0.28em] uppercase text-white/70">Moments that led us to forever</p>
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <p className="text-[11px] tracking-[0.32em] uppercase text-white/80 mb-2">
+            Our Journey
+          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl tracking-[0.04em] text-white">
+            Love Story
+          </h2>
+          <div className="mx-auto mt-4 h-px w-24 bg-gradient-to-r from-roseveil via-gold-400/70 to-roseveil"></div>
         </div>
-        <div className="simple-timeline-line love-story-timeline reveal">
-          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 flex justify-center">
-            <svg className="h-full" viewBox="0 0 0.2 100" preserveAspectRatio="none" aria-hidden="true">
-              <line className="timeline-line-stroke" x1="0.1" y1="0" x2="0.1" y2="100" strokeWidth="0.1" />
-            </svg>
-          </div>
-          <div className="space-y-20 sm:space-y-24 relative">
+        
+        {/* Timeline Container */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Timeline Line - Desktop Only */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gold-400/30 via-gold-400/50 to-gold-400/30 -translate-x-1/2"></div>
+          
+          <div className="space-y-12 sm:space-y-16">
             {storyItems.map((item, index) => (
-              <article key={index} className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item reveal">
-                {item.imageFirst ? (
-                  <>
-                    <div className="flex justify-end pr-0 sm:pr-4">
-                      <div className="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
-                        <div className="h-60 sm:h-72 md:h-80 overflow-hidden">
-                          <img loading="lazy" src={item.image} alt={item.title} className="w-full h-full object-cover" />
+              <div key={index} className="relative">
+                {/* Mobile Layout */}
+                <div className="md:hidden">
+                  <div className="flex flex-col space-y-4">
+                    {/* Timeline Dot - Mobile */}
+                    <div className="flex items-center space-x-3">
+                      <div className="w-4 h-4 rounded-full bg-gold-400 border-4 border-white shadow-lg"></div>
+                      <span className="font-serif text-lg text-white">{item.year}</span>
+                    </div>
+                    
+                    {/* Content - Mobile */}
+                    <div className="ml-7">
+                      <h3 className="font-serif text-2xl text-white mb-2">{item.title}</h3>
+                      <p className="text-white/90 mb-4">{item.description}</p>
+                      
+                      {/* Image - Mobile */}
+                      <div className="w-full max-w-sm mx-auto">
+                        <div className="rounded-2xl overflow-hidden shadow-lg border border-white/30">
+                          <img 
+                            loading="lazy" 
+                            src={item.image} 
+                            alt={item.title} 
+                            className="w-full h-48 sm:h-56 object-cover"
+                            style={{ willChange: 'transform' }}
+                          />
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center gap-3 simple-timeline-axis">
-                      <span className="simple-timeline-dot"></span>
-                    </div>
-                    <div className="pl-0 sm:pl-4">
-                      <p className="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">{item.year}</p>
-                      <h3 className="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">{item.title}</h3>
-                      <p className="text-sm sm:text-base text-white/80">{item.description}</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="pr-0 sm:pr-4">
-                      <p className="font-serif text-xl sm:text-2xl tracking-[0.18em] mb-1 text-white">{item.year}</p>
-                      <h3 className="font-serif text-2xl sm:text-3xl tracking-[0.04em] mb-1 text-white">{item.title}</h3>
-                      <p className="text-sm sm:text-base text-white/80">{item.description}</p>
-                    </div>
-                    <div className="flex flex-col items-center gap-3 simple-timeline-axis">
-                      <span className="simple-timeline-dot"></span>
-                    </div>
-                    <div className="pl-0 sm:pl-4 flex justify-start">
-                      <div className="glass rounded-3xl border border-white/20 bg-white/10 shadow-soft backdrop-saturate-150 overflow-hidden w-full max-w-md">
-                        <div className="h-60 sm:h-72 md:h-80 overflow-hidden">
-                          <img loading="lazy" src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                  </div>
+                </div>
+
+                {/* Desktop Layout */}
+                <div className="hidden md:block">
+                  <div className="grid grid-cols-2 gap-8 items-center">
+                    {item.imageFirst ? (
+                      <>
+                        {/* Image Left */}
+                        <div className="text-right">
+                          <div className="inline-block rounded-2xl overflow-hidden shadow-xl border border-white/30">
+                            <img 
+                              loading="lazy" 
+                              src={item.image} 
+                              alt={item.title} 
+                              className="w-64 h-80 object-cover"
+                              style={{ willChange: 'transform' }}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </article>
+                        
+                        {/* Content Right */}
+                        <div className="text-left pl-8">
+                          <div className="flex items-center mb-3">
+                            <div className="w-4 h-4 rounded-full bg-gold-400 border-4 border-white shadow-lg mr-4"></div>
+                            <span className="font-serif text-xl text-white">{item.year}</span>
+                          </div>
+                          <h3 className="font-serif text-3xl text-white mb-2">{item.title}</h3>
+                          <p className="text-white/90">{item.description}</p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {/* Content Left */}
+                        <div className="text-right pr-8">
+                          <div className="flex items-center justify-end mb-3">
+                            <span className="font-serif text-xl text-white mr-4">{item.year}</span>
+                            <div className="w-4 h-4 rounded-full bg-gold-400 border-4 border-white shadow-lg"></div>
+                          </div>
+                          <h3 className="font-serif text-3xl text-white mb-2">{item.title}</h3>
+                          <p className="text-white/90">{item.description}</p>
+                        </div>
+                        
+                        {/* Image Right */}
+                        <div className="text-left">
+                          <div className="inline-block rounded-2xl overflow-hidden shadow-xl border border-white/30">
+                            <img 
+                              loading="lazy" 
+                              src={item.image} 
+                              alt={item.title} 
+                              className="w-64 h-80 object-cover"
+                              style={{ willChange: 'transform' }}
+                            />
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>

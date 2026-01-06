@@ -1,79 +1,169 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 
 const PhotoAlbum: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(2); // Start with middle image
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
   
   const images = [
-    './assets/img2.png',
-    './assets/img2.png',
-    './assets/img2.png',
-    './assets/img2.png',
-    './assets/img2.png',
-    './assets/img2.png'
+    '/gallery 1.png',
+    '/gallery 2.avif',
+    '/gallery 3 (2).avif',
+    '/gallery 4.avif',
+    '/gallery.avif'
   ];
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
   };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    if (isLeftSwipe && activeIndex < images.length - 1) {
+      nextSlide();
+    }
+    if (isRightSwipe && activeIndex > 0) {
+      prevSlide();
+    }
+  };
+
+  const getImageStyle = (index: number): React.CSSProperties => {
+    const isActive = index === activeIndex;
+    const isLeft = index === activeIndex - 1;
+    const isRight = index === activeIndex + 1;
+    
+    // Edge cases
+    const isFirstActive = activeIndex === 0 && index === 0;
+    const isLastActive = activeIndex === images.length - 1 && index === images.length - 1;
+    
+    // Base positioning - center all images
+    let baseStyle: React.CSSProperties = {
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: '220px',
+      height: '280px',
+      borderRadius: '12px',
+      overflow: 'hidden',
+      transition: 'transform 300ms ease-out, opacity 300ms ease-out, filter 300ms ease-out',
+      cursor: 'pointer',
+      willChange: 'transform, opacity, filter'
+    };
+
+    if (isActive) {
+      // Active image - centered and zoomed
+      return {
+        ...baseStyle,
+        transform: 'translate(-50%, -50%) scale(1.15)',
+        filter: 'blur(0px)',
+        opacity: 1,
+        zIndex: 20
+      };
+    }
+    
+    if (isLeft && !isFirstActive) {
+      // Left image - blurred and scaled down
+      return {
+        ...baseStyle,
+        transform: 'translate(-150%, -50%) scale(0.85)',
+        filter: 'blur(8px)',
+        opacity: 0.6,
+        zIndex: 10
+      };
+    }
+    
+    if (isRight && !isLastActive) {
+      // Right image - blurred and scaled down
+      return {
+        ...baseStyle,
+        transform: 'translate(50%, -50%) scale(0.85)',
+        filter: 'blur(8px)',
+        opacity: 0.6,
+        zIndex: 10
+      };
+    }
+    
+    // Hide all other images
+    return {
+      ...baseStyle,
+      opacity: 0,
+      pointerEvents: 'none' as const,
+      zIndex: 1
+    };
+  };
+
+  const goToSlide = useCallback((index: number) => {
+    setActiveIndex(index);
+  }, []);
+
+  const nextSlide = useCallback(() => {
+    setActiveIndex(prev => Math.min(prev + 1, images.length - 1));
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setActiveIndex(prev => Math.max(prev - 1, 0));
+  }, []);
 
   return (
-    <section className="relative py-16 sm:py-24 album-simple-section">
+    <section className="relative py-16 sm:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center mb-10 sm:mb-14 reveal">
-          <p className="text-[11px] tracking-[0.32em] uppercase text-deepred-700/70">Our Sweet Moments</p>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl md:text-5xl tracking-[0.04em] text-deepred-700">
-            Album Pre wedding</h2>
+        {/* Header */}
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <p className="text-[11px] tracking-[0.32em] uppercase text-red-800/70 mb-2">
+            Our Sweet Moments
+          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl tracking-[0.04em] text-red-800">
+            Album Pre wedding
+          </h2>
         </div>
-        <div className="album-simple-carousel reveal relative">
-          {/* Mobile-only navigation buttons */}
-          <button type="button"
-            onClick={prevSlide}
-            className="md:hidden absolute left-2 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-white shadow-soft border border-deepred-700/10 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-4 w-4 text-deepred-700">
-              <path fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
-                d="M15 18l-6-6l6-6" />
-            </svg>
-          </button>
-          <button type="button"
-            onClick={nextSlide}
-            className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full bg-white shadow-soft border border-deepred-700/10 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-4 w-4 text-deepred-700">
-              <path fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
-                d="M9 6l6 6l-6 6" />
-            </svg>
-          </button>
-          <div className="album-simple-viewport overflow-hidden">
-            <div 
-              className="album-simple-track flex transition-transform duration-300 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+
+        {/* Carousel Container */}
+        <div 
+          className="relative mx-auto max-w-4xl sm:max-w-5xl h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Images */}
+          {images.map((image, index) => (
+            <div
+              key={index}
+              style={getImageStyle(index)}
+              onClick={() => goToSlide(index)}
+              className="bg-white shadow-2xl"
             >
-              {images.map((image, index) => (
-                <figure 
-                  key={index}
-                  className={`album-simple-card w-full flex-shrink-0 ${index === currentIndex ? 'album-simple-card--active' : ''}`}
-                >
-                  <img loading="lazy" src={image} alt={`Album moment ${index + 1}`} className="w-full h-auto object-cover" />
-                </figure>
-              ))}
-            </div>
-          </div>
-          
-          {/* Desktop navigation dots */}
-          <div className="hidden md:flex justify-center mt-6 space-x-2">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-deepred-700' : 'bg-deepred-700/30'
-                }`}
+              <img 
+                src={image} 
+                alt={`Album moment ${index + 1}`}
+                className="w-full h-full object-cover"
               />
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Dots */}
+        <div className="flex justify-center mt-8 space-x-3">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                index === activeIndex 
+                  ? 'bg-red-800 scale-125' 
+                  : 'bg-red-800/30 hover:bg-red-800/50'
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
