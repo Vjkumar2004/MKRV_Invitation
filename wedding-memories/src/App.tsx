@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import Countdown from './components/Countdown';
 import EventDetails from './components/EventDetails';
@@ -8,9 +8,15 @@ import PhotoAlbum from './components/PhotoAlbum';
 import LazySection from './components/LazySection';
 import OpeningScreen from './components/OpeningScreen';
 
+// Utility function to detect iPhone
+const isIPhone = () => {
+  return /iPhone|iPod/.test(navigator.userAgent);
+};
+
 function App() {
   const [showMainContent, setShowMainContent] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [musicEnabled, setMusicEnabled] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleOpenInvitation = () => {
@@ -25,6 +31,10 @@ function App() {
         audioRef.current.play().catch(error => {
           console.log('Audio play failed:', error);
         });
+        // Set music as enabled when first played (for iPhone flow)
+        if (!musicEnabled) {
+          setMusicEnabled(true);
+        }
       }
       setIsPlaying(!isPlaying);
     }
@@ -46,6 +56,8 @@ function App() {
           onOpen={handleOpenInvitation}
           isPlaying={isPlaying}
           onToggleMusic={toggleMusic}
+          isIPhone={isIPhone()}
+          musicEnabled={musicEnabled}
         />
       )}
       

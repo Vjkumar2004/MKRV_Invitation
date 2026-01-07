@@ -5,9 +5,17 @@ interface OpeningScreenProps {
   onOpen: () => void;
   isPlaying?: boolean;
   onToggleMusic?: () => void;
+  isIPhone?: boolean;
+  musicEnabled?: boolean;
 }
 
-const OpeningScreen: React.FC<OpeningScreenProps> = ({ onOpen, isPlaying = false, onToggleMusic }) => {
+const OpeningScreen: React.FC<OpeningScreenProps> = ({ 
+  onOpen, 
+  isPlaying = false, 
+  onToggleMusic, 
+  isIPhone = false, 
+  musicEnabled = false 
+}) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -42,10 +50,10 @@ const OpeningScreen: React.FC<OpeningScreenProps> = ({ onOpen, isPlaying = false
         <div className="gradient-overlay" />
       </div>
 
-      {/* Music Control Button */}
-      {onToggleMusic && (
+      {/* Music Control Button - Only for iPhone */}
+      {isIPhone && onToggleMusic && (
         <button 
-          className="music-control"
+          className="music-control iphone-music-button"
           onClick={onToggleMusic}
           aria-label={isPlaying ? "Pause Music" : "Play Music"}
         >
@@ -59,17 +67,23 @@ const OpeningScreen: React.FC<OpeningScreenProps> = ({ onOpen, isPlaying = false
           <h1 className="couple-names">
             Muthukumar & Rajavali
           </h1>
-          <p className="romantic-text">We are tying the knot and would love for you to be part of our special day.</p>
           <p className="subtitle">Wedding Invitation</p>
         </div>
         
-        <button 
-          className="open-button"
-          onClick={handleOpenInvitation}
-          aria-label="Open Wedding Invitation"
-        >
-          Open Invitation
-        </button>
+        {/* Open Invitation Button - Hidden on iPhone until music is enabled */}
+        {!isIPhone || musicEnabled ? (
+          <button 
+            className="open-button"
+            onClick={handleOpenInvitation}
+            aria-label="Open Wedding Invitation"
+          >
+            Open Invitation
+          </button>
+        ) : (
+          <div className="iphone-message">
+            <p>Please enable music first to open the invitation</p>
+          </div>
+        )}
       </div>
     </div>
   );

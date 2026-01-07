@@ -66,6 +66,52 @@
   transform: scale(0.95);
 }
 
+.iphone-music-button {
+  position: fixed;
+  bottom: 100px;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #722f37;
+  border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(114, 47, 55, 0.2);
+  backdrop-filter: blur(10px);
+  animation: fade-up 1.5s ease-out 0.6s both;
+}
+
+.iphone-music-button:hover {
+  background: rgba(114, 47, 55, 0.1);
+  transform: translateX(50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(114, 47, 55, 0.3);
+}
+
+.iphone-music-button:active {
+  transform: translateX(50%) scale(0.95);
+}
+
+.iphone-message {
+  text-align: center;
+  animation: fade-up 1.5s ease-out 0.9s both;
+}
+
+.iphone-message p {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  color: #722f37;
+  opacity: 0.8;
+  margin: 0;
+  font-style: italic;
+}
+
 .content-container {
   position: absolute;
   inset: 0;
@@ -254,6 +300,13 @@
     font-size: 1.25rem;
     bottom: 15px;
     right: 15px;
+  }
+  
+  .iphone-music-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+    bottom: 80px;
   }
 }
 
