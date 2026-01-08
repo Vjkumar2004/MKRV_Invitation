@@ -110,22 +110,164 @@
 }
 
 @keyframes bgZoom {
-  from {
-    transform: scale(1.05);
+  0% {
+    transform: scale(1);
   }
 
-  to {
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
     transform: scale(1);
   }
 }
 
 @keyframes heartPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
 
   50% {
     transform: scale(1.1);
+  }
+}
+
+/* --- Premium Reveal System --- */
+
+/* Root variables for consistency */
+:root {
+  --reveal-duration: 800ms;
+  --reveal-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --reveal-translate: 24px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --reveal-duration: 650ms;
+    --reveal-translate: 16px;
+  }
+}
+
+/* Base Reveal Class */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(var(--reveal-translate));
+  will-change: transform, opacity;
+  transition:
+    opacity var(--reveal-duration) var(--reveal-easing),
+    transform var(--reveal-duration) var(--reveal-easing),
+    box-shadow 0.5s ease;
+}
+
+/* Trigger state when section becomes active */
+.animate-active .reveal-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Delays */
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-400 {
+  transition-delay: 400ms;
+}
+
+.delay-500 {
+  transition-delay: 500ms;
+}
+
+.delay-600 {
+  transition-delay: 600ms;
+}
+
+.delay-700 {
+  transition-delay: 700ms;
+}
+
+.delay-800 {
+  transition-delay: 800ms;
+}
+
+.delay-900 {
+  transition-delay: 900ms;
+}
+
+.delay-1000 {
+  transition-delay: 1000ms;
+}
+
+/* Heading Reveal */
+.reveal-heading {
+  transform: translateY(12px);
+}
+
+/* Divider Draw-in Animation */
+.reveal-divider {
+  width: 0;
+  opacity: 0;
+  transition: width 0.6s var(--reveal-easing), opacity 0.6s ease;
+  transition-delay: 200ms;
+}
+
+.animate-active .reveal-divider {
+  width: 96px;
+  /* Match standard divider width */
+  opacity: 1;
+}
+
+/* Side Reveals for Images */
+.reveal-left {
+  transform: translateX(-20px);
+}
+
+.reveal-right {
+  transform: translateX(20px);
+}
+
+@media (max-width: 640px) {
+
+  .reveal-left,
+  .reveal-right {
+    transform: translateY(var(--reveal-translate));
+    /* Single column on mobile */
+  }
+}
+
+/* Hover Interactivity (Desktop Only) */
+@media (min-width: 1024px) {
+  .hover-lift {
+    transition: transform 0.4s var(--reveal-easing), box-shadow 0.4s var(--reveal-easing);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+  }
+}
+
+/* Accessibility: Disable all transitions if reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal-on-scroll,
+  .reveal-divider,
+  .hover-lift {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    width: auto !important;
   }
 }
 
@@ -138,7 +280,7 @@
 }
 
 .bg-zoom {
-  animation: bgZoom 8s ease-out forwards;
+  animation: bgZoom 10s ease-in-out infinite;
 }
 
 .reveal {
@@ -167,16 +309,45 @@
   animation: fadeIn 0.8s ease-out forwards;
 }
 
-.simple-timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.simple-timeline-item:nth-child(2) { animation-delay: 0.2s; }
-.simple-timeline-item:nth-child(3) { animation-delay: 0.3s; }
-.simple-timeline-item:nth-child(4) { animation-delay: 0.4s; }
-.simple-timeline-item:nth-child(5) { animation-delay: 0.5s; }
-.simple-timeline-item:nth-child(6) { animation-delay: 0.6s; }
-.simple-timeline-item:nth-child(7) { animation-delay: 0.7s; }
-.simple-timeline-item:nth-child(8) { animation-delay: 0.8s; }
-.simple-timeline-item:nth-child(9) { animation-delay: 0.9s; }
-.simple-timeline-item:nth-child(10) { animation-delay: 1.0s; }
+.simple-timeline-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.simple-timeline-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.simple-timeline-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.simple-timeline-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.simple-timeline-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.simple-timeline-item:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.simple-timeline-item:nth-child(7) {
+  animation-delay: 0.7s;
+}
+
+.simple-timeline-item:nth-child(8) {
+  animation-delay: 0.8s;
+}
+
+.simple-timeline-item:nth-child(9) {
+  animation-delay: 0.9s;
+}
+
+.simple-timeline-item:nth-child(10) {
+  animation-delay: 1.0s;
+}
 
 .simple-timeline-axis {
   position: relative;
@@ -202,7 +373,9 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.5;
   }

@@ -77,12 +77,12 @@ const Schedule: React.FC = () => {
   return (
     <section className="relative py-20 sm:py-24 bg-[#3B2217] text-white">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16 reveal">
-          <h2 className="font-serif text-[22px] sm:text-[24px] tracking-[0.32em] uppercase text-white/90 mb-3">
+        <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16 reveal-on-scroll">
+          <h2 className="font-serif text-[22px] sm:text-[24px] tracking-[0.32em] uppercase text-white/90 mb-3 reveal-on-scroll reveal-heading delay-100">
             Join our celebration of love
           </h2>
         </div>
-        <div className="simple-timeline-line schedule-timeline reveal">
+        <div className="simple-timeline-line schedule-timeline reveal-on-scroll delay-200">
           <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 flex justify-center">
             <svg className="h-full" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true">
               <line className="timeline-line-stroke" x1="1" y1="0" x2="1" y2="100" />
@@ -91,7 +91,7 @@ const Schedule: React.FC = () => {
           <div className="space-y-16 sm:space-y-20 relative">
             {scheduleItems.map((item, index) => (
               <article key={index}
-                className="grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal">
+                className={`grid grid-cols-[1fr_auto_1fr] items-center gap-6 sm:gap-8 simple-timeline-item simple-timeline-card reveal-on-scroll delay-${300 + index * 100} ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}>
                 <div className="flex justify-end pr-4 sm:pr-6 simple-timeline-icon">
                   {item.icon}
                 </div>

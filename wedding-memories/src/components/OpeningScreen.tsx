@@ -57,7 +57,7 @@ const OpeningScreen: React.FC<OpeningScreenProps> = ({
           onClick={onToggleMusic}
           aria-label={isPlaying ? "Pause Music" : "Play Music"}
         >
-          {isPlaying ? '🔇' : '🔊'}
+          {isPlaying ? '🔊' : '🔇'}
         </button>
       )}
 

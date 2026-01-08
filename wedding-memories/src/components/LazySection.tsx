@@ -9,8 +9,8 @@ type LazySectionProps = {
 
 const LazySection: React.FC<LazySectionProps> = ({
   children,
-  rootMargin = '200px 0px',
-  threshold = 0.01,
+  rootMargin = '0px',
+  threshold = 0.20, // Trigger when 20% of section is visible
   minHeight
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -35,7 +35,11 @@ const LazySection: React.FC<LazySectionProps> = ({
   }, [isVisible, rootMargin, threshold]);
 
   return (
-    <div ref={ref} style={isVisible ? undefined : minHeight ? { minHeight } : undefined}>
+    <div
+      ref={ref}
+      className={isVisible ? 'animate-active' : ''}
+      style={isVisible ? undefined : minHeight ? { minHeight } : undefined}
+    >
       {isVisible ? children : null}
     </div>
   );
