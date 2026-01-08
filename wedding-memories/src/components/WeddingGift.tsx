@@ -10,7 +10,23 @@ const WeddingGift: React.FC = () => {
     const amounts = [101, 501, 1001, 2001, 5001];
 
     const getUpiUrl = (amount: number) => {
-        return `upi://pay?pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=Wedding%20Gift%20-%20Blessings`;
+        const baseUrl = `pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=Wedding%20Gift%20-%20Blessings`;
+        const standardUri = `upi://pay?${baseUrl}`;
+
+        // Detect Platform
+        const isAndroid = /Android/i.test(navigator.userAgent);
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        if (isAndroid) {
+            // Android specific intent to force Google Pay
+            return `intent://pay?${baseUrl}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(standardUri)};end`;
+        } else if (isIOS) {
+            // iOS specific scheme for Google Pay
+            return `googlegpay://pay?${baseUrl}`;
+        }
+
+        // Fallback to standard UPI for other platforms
+        return standardUri;
     };
 
     const handleAmountSelect = (amount: number) => {
@@ -34,7 +50,7 @@ const WeddingGift: React.FC = () => {
 
             <div className="container mx-auto px-4 sm:px-6 relative z-10">
                 <div className="text-center mb-16">
-                    <p className="text-[11px] tracking-[0.4em] uppercase text-[#8B4513]/70 font-semibold reveal-on-scroll">Blessings & Moi (மொய்)</p>
+                    <p className="text-[11px] tracking-[0.4em] uppercase text-[#8B4513]/70 font-semibold reveal-on-scroll">Blessings & Gift</p>
                     <h2 className="mt-3 font-serif text-4xl sm:text-5xl tracking-[0.02em] text-[#8B4513] reveal-on-scroll reveal-heading delay-100">Wedding Gift</h2>
                     <div className="mx-auto mt-6 h-px reveal-divider bg-gradient-to-r from-transparent via-[#DAA520] to-transparent"></div>
                 </div>
@@ -64,9 +80,9 @@ const WeddingGift: React.FC = () => {
                                     </div>
                                 )}
                             </div>
-                            <h3 className="font-serif text-3xl text-[#8B4513] mb-4 tracking-tight">Send Your Moi (மொய்)</h3>
+                            <h3 className="font-serif text-3xl text-[#8B4513] mb-4 tracking-tight">Send Your Gift</h3>
                             <p className="text-[#5D4037] font-serif italic text-lg leading-relaxed max-w-lg mx-auto opacity-80">
-                                "Your presence is our greatest joy, but if you wish to bless us with a gift, your moi would be cherished."
+                                "Your presence is our greatest joy, but if you wish to bless us with a gift, your gift would be cherished."
                             </p>
                         </div>
 
