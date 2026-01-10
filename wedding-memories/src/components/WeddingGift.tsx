@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const WeddingGift: React.FC = () => {
     const [selectedAmount, setSelectedAmount] = useState<number>(0);
     const [showCelebration, setShowCelebration] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const upiId = "muthu16571@ybl";
     const payeeName = "Muthukumar M";
@@ -15,11 +16,10 @@ const WeddingGift: React.FC = () => {
         const pn = encodeURIComponent(payeeName);
         const am = selectedAmount.toFixed(2);
         const cu = "INR";
-        const tn = encodeURIComponent("Blessings");
-        const tr = `MKRV${Date.now()}`; // Unique Transaction Reference
-        const mc = "0000"; // Generic Merchant Category Code
+        const tn = encodeURIComponent("Wedding Gift - Blessings");
 
-        const params = `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}&tn=${tn}&tr=${tr}&mc=${mc}&mode=02`;
+        // Use the exact parameters that were confirmed working on iPhone
+        const params = `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}&tn=${tn}`;
         const upiUri = `upi://pay?${params}`;
 
         // Detect Platform
@@ -27,29 +27,24 @@ const WeddingGift: React.FC = () => {
         const isAndroid = /Android/i.test(ua);
         const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
-        if (isAndroid) {
-            // Android: 'tez://' is the native GPay India scheme
-            const gpayAndroid = `tez://upi/pay?${params}`;
-            window.location.href = gpayAndroid;
+        // Unified Logic: Use gpay:// first, then fallback to upi://
+        const gpayUri = `gpay://upi/pay?${params}`;
 
-            // Fallback to universal UPI
-            setTimeout(() => {
-                if (document.hasFocus()) {
-                    window.location.href = upiUri;
-                }
-            }, 600);
-        } else if (isIOS) {
-            // iOS: Try gpay specifically
-            const gpayIOS = `gpay://upi/pay?${params}`;
-            window.location.href = gpayIOS;
+        window.location.href = gpayUri;
 
-            // Fallback to universal UPI
-            setTimeout(() => {
+        // Fallback for all browsers after a small delay
+        setTimeout(() => {
+            if (document.hasFocus()) {
                 window.location.href = upiUri;
-            }, 600);
-        } else {
-            window.location.href = upiUri;
-        }
+            }
+        }, 600);
+    };
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(upiId).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        });
     };
 
     const handleAmountSelect = (amount: number) => {
@@ -124,7 +119,7 @@ const WeddingGift: React.FC = () => {
                         </div>
 
                         {/* Enhanced Payment Button */}
-                        <div className="reveal-on-scroll delay-400">
+                        <div className="reveal-on-scroll delay-400 space-y-6">
                             <button
                                 onClick={handlePay}
                                 className={`gift-pay-button group relative inline-flex items-center justify-center w-full sm:w-auto px-16 py-6 bg-[#8B0000] text-[#FFF8F3] rounded-full overflow-hidden shadow-[0_20px_40px_-10px_rgba(139,0,0,0.5)] transition-all hover:scale-[1.03] active:scale-95 ${!selectedAmount || selectedAmount <= 0 ? 'opacity-50 pointer-events-none grayscale' : ''}`}
@@ -136,7 +131,24 @@ const WeddingGift: React.FC = () => {
                                     </span>
                                 </div>
                             </button>
-                            <p className="mt-6 text-[11px] uppercase tracking-[0.3em] text-[#8B4513]/50 font-bold">
+
+                            {/* Manual Logic Fallback */}
+                            <div className="flex flex-col items-center gap-3">
+                                <p className="text-[11px] uppercase tracking-[0.2em] text-[#8B4513]/40 font-bold">
+                                    Bank blocking the app?
+                                </p>
+                                <button
+                                    onClick={copyToClipboard}
+                                    className="text-[#8B4513]/70 hover:text-[#8B4513] transition-colors flex items-center gap-2 group"
+                                >
+                                    <span className="text-xs font-serif italic border-b border-[#8B4513]/30 group-hover:border-[#8B4513]">
+                                        {copied ? "✨ UPI ID Copied!" : `Copy UPI ID: ${upiId}`}
+                                    </span>
+                                    {!copied && <span className="text-sm">📋</span>}
+                                </button>
+                            </div>
+
+                            <p className="mt-8 text-[11px] uppercase tracking-[0.3em] text-[#8B4513]/50 font-bold">
                                 🔒 Secure Gift • {selectedAmount >= 500 ? "Extra Special " : ""} Blessings
                             </p>
                         </div>
