@@ -1,38 +1,30 @@
 import React, { useState } from 'react';
 
 const WeddingGift: React.FC = () => {
-    const [selectedAmount, setSelectedAmount] = useState<number>(0);
     const [showCelebration, setShowCelebration] = useState(false);
     const [copied, setCopied] = useState(false);
 
     const upiId = "muthu16571@ybl";
     const payeeName = "Muthukumar M";
 
-    const getUpiUris = (withAmount: boolean) => {
-        const pa = upiId;
-        const pn = encodeURIComponent(payeeName);
-        const am = selectedAmount.toFixed(2);
-        const cu = "INR";
+    const upiParams = `pa=${upiId}&pn=${encodeURIComponent(payeeName)}&cu=INR`;
+    const upiData = `upi://pay?${upiParams}`;
+    const qrCodeUrl = `https://quickchart.io/qr?text=${encodeURIComponent(upiData)}&size=300&margin=1`;
 
-        const params = withAmount
-            ? `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}`
-            : `pa=${pa}&pn=${pn}&cu=${cu}`;
-
+    const getUpiUris = () => {
         const ua = navigator.userAgent || navigator.vendor;
         const isAndroid = /Android/i.test(ua);
         const gpayScheme = isAndroid ? "tez" : "gpay";
 
         return {
-            upi: `upi://pay?${params}`,
-            gpay: `${gpayScheme}://upi/pay?${params}`
+            upi: `upi://pay?${upiParams}`,
+            gpay: `${gpayScheme}://upi/pay?${upiParams}`
         };
     };
 
     const handlePay = (e: React.MouseEvent) => {
         e.preventDefault();
-        if (!selectedAmount || selectedAmount <= 0) return;
-
-        const uris = getUpiUris(true);
+        const uris = getUpiUris();
         window.location.href = uris.gpay;
 
         // Fallback for all browsers after a small delay
@@ -43,28 +35,11 @@ const WeddingGift: React.FC = () => {
         }, 1000);
     };
 
-    const handleManualPay = () => {
-        const uris = getUpiUris(false);
-        window.location.href = uris.gpay;
-
-        setTimeout(() => {
-            if (document.hasFocus()) {
-                window.location.href = uris.upi;
-            }
-        }, 600);
-    };
-
     const copyToClipboard = () => {
         navigator.clipboard.writeText(upiId).then(() => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         });
-    };
-
-    const handleAmountSelect = (amount: number) => {
-        setSelectedAmount(amount);
-        setShowCelebration(true);
-        setTimeout(() => setShowCelebration(false), 2000);
     };
 
     return (
@@ -99,9 +74,9 @@ const WeddingGift: React.FC = () => {
                         <div className="corner-ornament ornament-bl"></div>
                         <div className="corner-ornament ornament-br"></div>
 
-                        <div className="mb-10 relative">
-                            <div className="gift-icon-container mb-6 scale-125">
-                                <span className="text-6xl filter drop-shadow-lg">🎁</span>
+                        <div className="mb-14 relative z-10">
+                            <div className="gift-icon-container mb-8 scale-150">
+                                <span className="text-7xl filter drop-shadow-xl">🎁</span>
                                 {showCelebration && (
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <div className="celebration-particles">
@@ -112,70 +87,53 @@ const WeddingGift: React.FC = () => {
                                     </div>
                                 )}
                             </div>
-                            <h3 className="font-serif text-3xl text-[#8B4513] mb-4 tracking-tight">Send Your Gift</h3>
+                            <h3 className="font-serif text-3xl text-[#8B4513] mb-6 tracking-tight">Send Your Gift</h3>
                             <p className="text-[#5D4037] font-serif italic text-lg leading-relaxed max-w-lg mx-auto opacity-80">
                                 "Your presence is our greatest joy, but if you wish to bless us with a gift, your gift would be cherished."
                             </p>
                         </div>
 
-                        <div className="mb-12 max-w-xs mx-auto relative z-10">
-                            <label className="block text-[10px] uppercase tracking-[0.2em] text-[#8B4513]/60 font-bold mb-4">Enter Amount</label>
-                            <div className="relative group">
-                                <span className="absolute left-6 top-1/2 -translate-y-1/2 text-[#8B4513] font-serif text-2xl opacity-60">₹</span>
-                                <input
-                                    type="number"
-                                    value={selectedAmount || ''}
-                                    onChange={(e) => handleAmountSelect(Number(e.target.value))}
-                                    className="w-full pl-12 pr-6 py-5 bg-white/40 backdrop-blur-md rounded-2xl border-2 border-[#ecd6bc] text-[#8B4513] font-serif text-3xl text-center focus:outline-none focus:border-[#8B4513] focus:bg-white/60 transition-all duration-300 shadow-inner group-hover:shadow-lg"
+                        {/* QR Code Section - Centered */}
+                        <div className="mb-14 flex flex-col items-center relative z-10">
+                            <div className="relative p-6 bg-white rounded-[2.5rem] shadow-2xl border-4 border-[#DAA520]/20 group/qr">
+                                <div className="absolute -inset-3 border-2 border-[#DAA520]/10 rounded-[3rem] animate-pulse"></div>
+                                <img
+                                    src={qrCodeUrl}
+                                    alt="UPI QR Code"
+                                    className="w-56 h-56 sm:w-64 sm:h-64 rounded-2xl"
                                 />
+                                <div className="mt-6 text-[11px] uppercase tracking-[.3em] text-[#8B4513]/60 font-bold">
+                                    Scan to Pay
+                                </div>
                             </div>
-                            <p className="mt-4 text-[11px] text-[#5D4037]/60 italic font-serif">"Every blessing, small or large, means the world to us."</p>
                         </div>
 
                         {/* Enhanced Payment Button */}
-                        <div className="reveal-on-scroll delay-400 space-y-6">
+                        <div className="reveal-on-scroll delay-400 space-y-10 relative z-10">
                             <button
                                 onClick={handlePay}
-                                className={`gift-pay-button group relative inline-flex items-center justify-center w-full sm:w-auto px-16 py-6 bg-[#8B0000] text-[#FFF8F3] rounded-full overflow-hidden shadow-[0_20px_40px_-10px_rgba(139,0,0,0.5)] transition-all hover:scale-[1.03] active:scale-95 ${!selectedAmount || selectedAmount <= 0 ? 'opacity-50 pointer-events-none grayscale' : ''}`}
+                                className="gift-pay-button group relative inline-flex items-center justify-center w-full sm:w-auto px-20 py-6 bg-[#8B0000] text-[#FFF8F3] rounded-full overflow-hidden shadow-[0_20px_40px_-10px_rgba(139,0,0,0.5)] transition-all hover:scale-[1.03] active:scale-95"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
                                 <div className="flex items-center gap-4">
                                     <span className="font-serif tracking-[0.25em] uppercase text-sm font-bold">
-                                        Bless via GPay / UPI
+                                        Open GPay / UPI App
                                     </span>
                                 </div>
                             </button>
 
-                            {/* Manual Logic Fallback */}
-                            <div className="flex flex-col items-center gap-4 bg-white/40 p-6 rounded-3xl border border-[#8B4513]/10">
-                                <div className="text-center">
-                                    <p className="text-[11px] uppercase tracking-[0.2em] text-[#8B4513]/60 font-bold mb-1">
-                                        Seeing a "Bank Limit" error?
-                                    </p>
-                                    <p className="text-[10px] text-[#8B4513]/40 italic leading-tight">
-                                        Some banks require you to enter the amount manually for security.
-                                    </p>
-                                </div>
-
-                                <div className="flex flex-wrap justify-center gap-4">
-                                    <button
-                                        onClick={handleManualPay}
-                                        className="text-[11px] uppercase tracking-[0.15em] bg-[#8B4513]/10 hover:bg-[#8B4513]/20 text-[#8B4513] px-4 py-2 rounded-full transition-all font-bold"
-                                    >
-                                        Try: Enter Amount Manually ✍️
-                                    </button>
-
-                                    <button
-                                        onClick={copyToClipboard}
-                                        className="text-[11px] uppercase tracking-[0.15em] bg-[#DAA520]/10 hover:bg-[#DAA520]/20 text-[#8B4513] px-4 py-2 rounded-full transition-all font-bold"
-                                    >
-                                        {copied ? "✨ UPI ID Copied!" : "Try: Copy UPI ID 📋"}
-                                    </button>
-                                </div>
+                            {/* Simple Fallback */}
+                            <div className="flex flex-col items-center gap-4">
+                                <button
+                                    onClick={copyToClipboard}
+                                    className="text-[11px] uppercase tracking-[0.2em] bg-white/50 hover:bg-white/80 text-[#8B4513]/70 px-6 py-3 rounded-full transition-all border border-[#8B4513]/10 font-bold flex items-center gap-2"
+                                >
+                                    {copied ? "✨ UPI ID Copied!" : `Copy UPI ID: ${upiId}`}
+                                </button>
                             </div>
 
-                            <p className="mt-8 text-[11px] uppercase tracking-[0.3em] text-[#8B4513]/50 font-bold">
-                                🔒 Secure Gift • {selectedAmount >= 500 ? "Extra Special " : ""} Blessings
+                            <p className="mt-10 text-[10px] uppercase tracking-[0.4em] text-[#8B4513]/40 font-bold">
+                                🔒 Secure Gift • Direct Transfer
                             </p>
                         </div>
                     </div>
