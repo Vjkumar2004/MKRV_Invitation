@@ -26,12 +26,12 @@ const WeddingGift: React.FC = () => {
         const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
         if (isAndroid) {
-            // Android: Match the successful iPhone logic by using 'googlepay://' if possible
-            // and ensuring the amount has exactly two decimal places (handled in 'params')
-            const gpayAndroid = `googlepay://upi/pay?${params}`;
+            // Android: 'tez://' is the specific scheme for GPay India (formerly Tez)
+            // It's often more reliable for passing amount than universal 'upi://'
+            const gpayAndroid = `tez://upi/pay?${params}`;
             const upiUrl = `upi://pay?${params}`;
 
-            // Try direct GPay link
+            // Try direct GPay Link (Tez scheme)
             window.location.href = gpayAndroid;
 
             // Fallback to universal UPI chooser
