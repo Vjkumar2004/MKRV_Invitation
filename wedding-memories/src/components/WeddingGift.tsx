@@ -15,9 +15,11 @@ const WeddingGift: React.FC = () => {
         const pn = encodeURIComponent(payeeName);
         const am = selectedAmount.toFixed(2);
         const cu = "INR";
-        const tn = encodeURIComponent("Wedding Gift - Blessings");
+        const tn = encodeURIComponent("Blessings");
+        const tr = `MKRV${Date.now()}`; // Unique Transaction Reference
+        const mc = "0000"; // Generic Merchant Category Code
 
-        const params = `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}&tn=${tn}`;
+        const params = `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}&tn=${tn}&tr=${tr}&mc=${mc}&mode=02`;
         const upiUri = `upi://pay?${params}`;
 
         // Detect Platform
@@ -26,34 +28,26 @@ const WeddingGift: React.FC = () => {
         const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
         if (isAndroid) {
-            // Android: 'tez://' is the specific scheme for GPay India (formerly Tez)
-            // It's often more reliable for passing amount than universal 'upi://'
+            // Android: 'tez://' is the native GPay India scheme
             const gpayAndroid = `tez://upi/pay?${params}`;
-            const upiUrl = `upi://pay?${params}`;
-
-            // Try direct GPay Link (Tez scheme)
             window.location.href = gpayAndroid;
 
-            // Fallback to universal UPI chooser
+            // Fallback to universal UPI
             setTimeout(() => {
                 if (document.hasFocus()) {
-                    window.location.href = upiUrl;
+                    window.location.href = upiUri;
                 }
             }, 600);
         } else if (isIOS) {
-            // iOS: Try gpay specifically, then fallback to standard upi chooser
-            // gpay:// is the modern scheme; upi:// triggers the generic app picker
+            // iOS: Try gpay specifically
             const gpayIOS = `gpay://upi/pay?${params}`;
-
-            // Try specific GPay link
             window.location.href = gpayIOS;
 
-            // Fallback to generic UPI chooser after a small delay if GPay isn't found
+            // Fallback to universal UPI
             setTimeout(() => {
                 window.location.href = upiUri;
-            }, 500);
+            }, 600);
         } else {
-            // Desktop/Other: Generic UPI
             window.location.href = upiUri;
         }
     };

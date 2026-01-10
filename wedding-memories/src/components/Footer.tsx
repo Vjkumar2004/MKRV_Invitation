@@ -20,11 +20,6 @@ const Footer: React.FC = () => {
           <div className="seal-line"></div>
         </div>
 
-        <div className="footer-names">
-          <p className="signature-text">Muthukumar & Rajavalli</p>
-          <div className="date-badge">20 • 02 • 2026</div>
-        </div>
-
         <div className="mt-12 flex flex-col items-center gap-4">
           <p className="copyright-text opacity-50">
             Presented by Invite2gather
