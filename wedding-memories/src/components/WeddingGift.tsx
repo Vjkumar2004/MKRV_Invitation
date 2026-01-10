@@ -14,15 +14,17 @@ const WeddingGift: React.FC = () => {
         const standardUri = `upi://pay?${baseUrl}`;
 
         // Detect Platform
-        const isAndroid = /Android/i.test(navigator.userAgent);
-        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const ua = navigator.userAgent || navigator.vendor;
+        const isAndroid = /Android/i.test(ua);
+        const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
         if (isAndroid) {
             // Android specific intent to force Google Pay
             return `intent://pay?${baseUrl}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(standardUri)};end`;
         } else if (isIOS) {
-            // iOS specific scheme for Google Pay
-            return `googlegpay://pay?${baseUrl}`;
+            // iOS specific: 'tez://' is the custom scheme for GPay (formerly Tez) on iPhone
+            // This is more reliable than 'googlegpay://' on Safari
+            return `tez://pay?${baseUrl}`;
         }
 
         // Fallback to standard UPI for other platforms
