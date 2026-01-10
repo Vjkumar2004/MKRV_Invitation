@@ -8,34 +8,48 @@ const WeddingGift: React.FC = () => {
     const upiId = "muthu16571@ybl";
     const payeeName = "Muthukumar M";
 
-    const handlePay = (e: React.MouseEvent) => {
-        e.preventDefault();
-        if (!selectedAmount || selectedAmount <= 0) return;
-
+    const getUpiUris = (withAmount: boolean) => {
         const pa = upiId;
         const pn = encodeURIComponent(payeeName);
         const am = selectedAmount.toFixed(2);
         const cu = "INR";
-        const tn = encodeURIComponent("Wedding Gift - Blessings");
 
-        // Use the exact parameters that were confirmed working on iPhone
-        const params = `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}&tn=${tn}`;
-        const upiUri = `upi://pay?${params}`;
+        const params = withAmount
+            ? `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}`
+            : `pa=${pa}&pn=${pn}&cu=${cu}`;
 
-        // Detect Platform
         const ua = navigator.userAgent || navigator.vendor;
         const isAndroid = /Android/i.test(ua);
-        const isIOS = /iPhone|iPad|iPod/i.test(ua);
+        const gpayScheme = isAndroid ? "tez" : "gpay";
 
-        // Unified Logic: Use gpay:// first, then fallback to upi://
-        const gpayUri = `gpay://upi/pay?${params}`;
+        return {
+            upi: `upi://pay?${params}`,
+            gpay: `${gpayScheme}://upi/pay?${params}`
+        };
+    };
 
-        window.location.href = gpayUri;
+    const handlePay = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (!selectedAmount || selectedAmount <= 0) return;
+
+        const uris = getUpiUris(true);
+        window.location.href = uris.gpay;
 
         // Fallback for all browsers after a small delay
         setTimeout(() => {
             if (document.hasFocus()) {
-                window.location.href = upiUri;
+                window.location.href = uris.upi;
+            }
+        }, 1000);
+    };
+
+    const handleManualPay = () => {
+        const uris = getUpiUris(false);
+        window.location.href = uris.gpay;
+
+        setTimeout(() => {
+            if (document.hasFocus()) {
+                window.location.href = uris.upi;
             }
         }, 600);
     };
@@ -133,19 +147,31 @@ const WeddingGift: React.FC = () => {
                             </button>
 
                             {/* Manual Logic Fallback */}
-                            <div className="flex flex-col items-center gap-3">
-                                <p className="text-[11px] uppercase tracking-[0.2em] text-[#8B4513]/40 font-bold">
-                                    Bank blocking the app?
-                                </p>
-                                <button
-                                    onClick={copyToClipboard}
-                                    className="text-[#8B4513]/70 hover:text-[#8B4513] transition-colors flex items-center gap-2 group"
-                                >
-                                    <span className="text-xs font-serif italic border-b border-[#8B4513]/30 group-hover:border-[#8B4513]">
-                                        {copied ? "✨ UPI ID Copied!" : `Copy UPI ID: ${upiId}`}
-                                    </span>
-                                    {!copied && <span className="text-sm">📋</span>}
-                                </button>
+                            <div className="flex flex-col items-center gap-4 bg-white/40 p-6 rounded-3xl border border-[#8B4513]/10">
+                                <div className="text-center">
+                                    <p className="text-[11px] uppercase tracking-[0.2em] text-[#8B4513]/60 font-bold mb-1">
+                                        Seeing a "Bank Limit" error?
+                                    </p>
+                                    <p className="text-[10px] text-[#8B4513]/40 italic leading-tight">
+                                        Some banks require you to enter the amount manually for security.
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-wrap justify-center gap-4">
+                                    <button
+                                        onClick={handleManualPay}
+                                        className="text-[11px] uppercase tracking-[0.15em] bg-[#8B4513]/10 hover:bg-[#8B4513]/20 text-[#8B4513] px-4 py-2 rounded-full transition-all font-bold"
+                                    >
+                                        Try: Enter Amount Manually ✍️
+                                    </button>
+
+                                    <button
+                                        onClick={copyToClipboard}
+                                        className="text-[11px] uppercase tracking-[0.15em] bg-[#DAA520]/10 hover:bg-[#DAA520]/20 text-[#8B4513] px-4 py-2 rounded-full transition-all font-bold"
+                                    >
+                                        {copied ? "✨ UPI ID Copied!" : "Try: Copy UPI ID 📋"}
+                                    </button>
+                                </div>
                             </div>
 
                             <p className="mt-8 text-[11px] uppercase tracking-[0.3em] text-[#8B4513]/50 font-bold">
