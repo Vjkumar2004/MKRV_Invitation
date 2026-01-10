@@ -26,8 +26,8 @@ const Schedule: React.FC = () => {
     },
     {
       date: '25/01/2026',
-      title: 'Halti',
-      description: 'Traditional Halti ceremony with family and friends.',
+      title: 'Haldi',
+      description: 'Traditional Haldi ceremony with family and friends.',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="h-20 w-20 sm:h-24 sm:w-24"
           aria-label="Camera icon" role="img">

@@ -7,11 +7,14 @@ const WeddingGift: React.FC = () => {
     const upiId = "muthu16571@ybl";
     const payeeName = "Muthukumar M";
 
-    const amounts = [101, 501, 1001, 2001, 5001];
-
     const getUpiUrl = (amount: number) => {
-        const baseUrl = `pa=${upiId}&pn=${payeeName}&am=${amount}&cu=INR&tn=Wedding%20Gift%20-%20Blessings`;
-        const standardUri = `upi://pay?${baseUrl}`;
+        const pa = upiId;
+        const pn = encodeURIComponent(payeeName);
+        const am = amount.toString();
+        const cu = "INR";
+        const tn = encodeURIComponent("Wedding Gift - Blessings");
+        const params = `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}&tn=${tn}`;
+        const standardUri = `upi://pay?${params}`;
 
         // Detect Platform
         const ua = navigator.userAgent || navigator.vendor;
@@ -20,11 +23,10 @@ const WeddingGift: React.FC = () => {
 
         if (isAndroid) {
             // Android specific intent to force Google Pay
-            return `intent://pay?${baseUrl}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(standardUri)};end`;
+            return `intent://pay?${params}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(standardUri)};end`;
         } else if (isIOS) {
             // iOS specific: 'tez://' is the custom scheme for GPay (formerly Tez) on iPhone
-            // This is more reliable than 'googlegpay://' on Safari
-            return `tez://pay?${baseUrl}`;
+            return `tez://pay?${params}`;
         }
 
         // Fallback to standard UPI for other platforms
@@ -88,30 +90,27 @@ const WeddingGift: React.FC = () => {
                             </p>
                         </div>
 
-                        {/* Amount Selector with Proper Grid Alignment */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-12 max-w-md mx-auto relative z-10">
-                            {amounts.map((amount) => (
-                                <button
-                                    key={amount}
-                                    onClick={() => handleAmountSelect(amount)}
-                                    className={`relative px-4 py-4 rounded-2xl border-2 transition-all duration-500 font-serif text-xl overflow-hidden
-                                        ${selectedAmount === amount
-                                            ? 'bg-[#8B4513] border-[#8B4513] text-[#FFF8F3] shadow-[0_12px_24px_rgba(139,69,19,0.3)] scale-105 z-10'
-                                            : 'bg-white/40 border-[#ecd6bc] text-[#8B4513] hover:border-[#8B4513]/30 hover:bg-white/60'}`}
-                                >
-                                    <span className="relative z-10">₹{amount}</span>
-                                    {selectedAmount === amount && (
-                                        <span className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent"></span>
-                                    )}
-                                </button>
-                            ))}
+                        {/* Manual Amount Input Field */}
+                        <div className="mb-12 max-w-xs mx-auto relative z-10">
+                            <label className="block text-[10px] uppercase tracking-[0.2em] text-[#8B4513]/60 font-bold mb-4">Enter Amount</label>
+                            <div className="relative group">
+                                <span className="absolute left-6 top-1/2 -translate-y-1/2 text-[#8B4513] font-serif text-2xl opacity-60">₹</span>
+                                <input
+                                    type="number"
+                                    value={selectedAmount || ''}
+                                    onChange={(e) => handleAmountSelect(Number(e.target.value))}
+                                    placeholder="Enter amount"
+                                    className="w-full pl-12 pr-6 py-5 bg-white/40 backdrop-blur-md rounded-2xl border-2 border-[#ecd6bc] text-[#8B4513] font-serif text-3xl text-center focus:outline-none focus:border-[#8B4513] focus:bg-white/60 transition-all duration-300 shadow-inner group-hover:shadow-lg"
+                                />
+                            </div>
+                            <p className="mt-4 text-[11px] text-[#5D4037]/60 italic font-serif">"Every blessing, small or large, means the world to us."</p>
                         </div>
 
                         {/* Enhanced Payment Button (Image Removed) */}
                         <div className="reveal-on-scroll delay-400">
                             <a
                                 href={getUpiUrl(selectedAmount)}
-                                className="gift-pay-button group relative inline-flex items-center justify-center w-full sm:w-auto px-16 py-6 bg-[#8B0000] text-[#FFF8F3] rounded-full overflow-hidden shadow-[0_20px_40px_-10px_rgba(139,0,0,0.5)] transition-all hover:scale-[1.03] active:scale-95"
+                                className={`gift-pay-button group relative inline-flex items-center justify-center w-full sm:w-auto px-16 py-6 bg-[#8B0000] text-[#FFF8F3] rounded-full overflow-hidden shadow-[0_20px_40px_-10px_rgba(139,0,0,0.5)] transition-all hover:scale-[1.03] active:scale-95 ${!selectedAmount || selectedAmount <= 0 ? 'opacity-50 pointer-events-none grayscale' : ''}`}
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
                                 <div className="flex items-center gap-4">

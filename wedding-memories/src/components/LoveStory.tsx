@@ -33,7 +33,7 @@ const LoveStory: React.FC = () => {
             description: '“Late-night talks, silly laughs, and memories we’ll cherish forever.”'
         },
         {
-            image: '/timeline 7.png',
+            image: '/timeline-7-replace.jpeg',
             title: '💕 Through Ups & Downs',
             description: '“Not every chapter was easy, but every challenge made us stronger together.”'
         },
@@ -43,7 +43,7 @@ const LoveStory: React.FC = () => {
             description: '“Through changes and time, we chose each other again and again.”'
         },
         {
-            image: '/timeline 9.avif',
+            image: '/timeline-9-replace.jpeg',
             title: '💕 Love That Stayed',
             description: '“Years passed, but our love stayed constant — deeper, stronger, and truer.”'
         },
@@ -120,22 +120,22 @@ const LoveStory: React.FC = () => {
 
     const renderPage = (pageIndex: number) => {
         if (pageIndex === 0) {
-            // Cover page
+            // Enhanced Cover page
             return (
                 <div className="book-page book-cover">
-                    <div className="ornament ornament-tl"></div>
-                    <div className="ornament ornament-tr"></div>
-                    <div className="ornament ornament-bl"></div>
-                    <div className="ornament ornament-br"></div>
                     <div className="book-spine"></div>
                     <div className="cover-content">
                         <div className="main-heart-container">
                             <div className="large-cover-heart">
-                                <h1 className="cover-title heart-text">MKRV</h1>
+                                <h1 className="cover-title heart-text pulse-once">MKRV</h1>
                             </div>
                         </div>
+                        <div className="cover-footer">
+                            <p className="footer-text gold-text">A Journey of Love</p>
+                            <div className="tiny-divider"></div>
+                            <p className="tap-instruction">Tap to Open</p>
+                        </div>
                     </div>
-                    <div className="book-ribbon"></div>
                 </div>
             );
         }
@@ -166,26 +166,35 @@ const LoveStory: React.FC = () => {
             );
         }
 
-        // Final Page
+        // Final Page - Enhanced Luxury Design
         if (pageIndex === 10) {
             return (
                 <div className="book-page final-page">
-                    <div className="ornament ornament-tl"></div>
-                    <div className="ornament ornament-br"></div>
+                    <div className="luxury-ornament l-orn-tl scale-75"></div>
+                    <div className="luxury-ornament l-orn-br scale-75"></div>
+
+                    <div className="floating-hearts">
+                        {[...Array(5)].map((_, i) => (
+                            <span key={i} className={`float-heart fh-${i}`}>❤️</span>
+                        ))}
+                    </div>
+
                     <div className="page-content story-page final-content">
-                        <div className="final-heart-wrap">
-                            <span className="heart-icon">❤️</span>
-                            <span className="heart-icon-small">❤️</span>
+                        <div className="final-header-design">
+                            <div className="final-heart-wrap">
+                                <span className="heart-icon shine-effect">❤️</span>
+                            </div>
+                            <h3 className="story-title luxury-gold-title">The Beginning of Forever</h3>
+                            <div className="ornate-separator"></div>
                         </div>
-                        <h3 className="story-title gold-text" style={{ fontSize: '1.8rem' }}>The Beginning of Forever</h3>
-                        <div className="gold-divider"></div>
-                        <p className="story-description" style={{ fontSize: '1rem', color: '#8B4513' }}>
+
+                        <p className="story-description premium-quote">
                             “This is not the end of our story… it’s just the beginning of forever.”
                         </p>
-                        <div className="invitation-box">
-                            <p className="invitation-message">
-                                We are tying the knot and would love for you to be part of our special day.
-                            </p>
+
+                        <div className="final-footer">
+                            <span className="with-love">With Love,</span>
+                            <span className="couple-names gold-text">Muthukumar & Rajavalli</span>
                         </div>
                     </div>
                 </div>
@@ -502,19 +511,23 @@ const LoveStory: React.FC = () => {
           text-align: center;
           z-index: 5;
           width: 100%;
+          height: 100%;
           display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
+          padding-left: 15px; /* Accounting for spine */
         }
 
         .main-heart-container {
           position: relative;
-          width: 250px;
-          height: 250px;
+          width: 180px;
+          height: 180px;
           display: flex;
           align-items: center;
           justify-content: center;
           filter: drop-shadow(0 10px 20px rgba(139, 69, 19, 0.3));
+          margin-bottom: 2rem;
         }
 
         .large-cover-heart {
@@ -527,6 +540,7 @@ const LoveStory: React.FC = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: transform 0.5s ease;
         }
 
         .large-cover-heart::before,
@@ -599,7 +613,170 @@ const LoveStory: React.FC = () => {
 
         .shadow-active {
           opacity: 1;
-          background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+          background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        /* Luxury Ornaments */
+        .luxury-ornament {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 C 10 30, 30 10, 50 10 C 70 10, 90 30, 90 50 C 90 70, 70 90, 50 90 C 30 90, 10 70, 10 50' fill='none' stroke='%23BF953F' stroke-width='1.5'/%3E%3Cpath d='M20 20 L40 40 M20 40 L40 20' stroke='%23FCF6BA' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%23DAA520'/%3E%3Cpath d='M0 0 L15 0 L0 15 Z' fill='%23BF953F'/%3E%3C/svg%3E");
+          background-size: contain;
+          z-index: 10;
+          opacity: 0.8;
+        }
+        .l-orn-tl { top: 15px; left: 25px; }
+        .l-orn-tr { top: 15px; right: 15px; transform: rotate(90deg); }
+        .l-orn-bl { bottom: 15px; left: 25px; transform: rotate(-90deg); }
+        .l-orn-br { bottom: 15px; right: 15px; transform: rotate(180deg); }
+
+        .luxury-gold-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.8rem;
+          margin-bottom: 0.5rem;
+          background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shine-text 3s infinite linear;
+          background-size: 200% auto;
+        }
+
+        @keyframes shine-text {
+          to { background-position: 200% center; }
+        }
+
+        .ornate-separator {
+          width: 120px;
+          height: 12px;
+          margin: 0.5rem auto 1.5rem;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 Q 25 0, 50 5 Q 75 10, 100 5' fill='none' stroke='%23BF953F' stroke-width='1'/%3E%3C/svg%3E");
+          background-size: cover;
+        }
+
+        .premium-quote {
+          font-family: 'Playfair Display', serif;
+          font-style: italic;
+          color: #8B4513;
+          font-size: 1.1rem;
+          line-height: 1.6;
+          margin: 1rem 0;
+          opacity: 0.9;
+        }
+
+        .ornate-invitation-frame {
+          position: relative;
+          padding: 2rem 1.5rem;
+          margin-top: 1rem;
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 12px;
+        }
+
+        .frame-border {
+          position: absolute;
+          inset: 0;
+          border: 1px solid #DAA520;
+          border-radius: 12px;
+          mask: radial-gradient(circle at center, transparent 30%, black 100%);
+        }
+        
+        .ornate-invitation-frame::after {
+          content: '';
+          position: absolute;
+          inset: 4px;
+          border: 2px solid rgba(191, 149, 63, 0.3);
+          border-radius: 8px;
+          pointer-events: none;
+        }
+
+        .invitation-message-v2 {
+          font-family: 'Outfit', sans-serif;
+          font-size: 1.1rem;
+          color: #5D4037;
+          font-weight: 500;
+          line-height: 1.6;
+          margin: 0;
+          position: relative;
+          z-index: 1;
+        }
+
+        .final-footer {
+          margin-top: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+          padding-bottom: 1rem;
+        }
+
+        .couple-names {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.2rem;
+          font-weight: 700;
+        }
+
+        .floating-hearts {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 5;
+        }
+
+        .float-heart {
+          position: absolute;
+          opacity: 0;
+          animation: float-up-fade 4s infinite ease-in-out;
+        }
+
+        @keyframes float-up-fade {
+          0% { transform: translateY(20px) scale(0.5); opacity: 0; }
+          50% { opacity: 0.5; }
+          100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
+
+        .fh-0 { left: 20%; animation-delay: 0s; }
+        .fh-1 { left: 40%; animation-delay: 1s; }
+        .fh-2 { left: 60%; animation-delay: 2s; }
+        .fh-3 { left: 80%; animation-delay: 0.5s; }
+        .fh-4 { left: 50%; animation-delay: 1.5s; }
+
+        .pulse-once {
+          animation: pulse-grow 2s ease-out infinite;
+        }
+
+        @keyframes pulse-grow {
+           0%, 100% { transform: scale(1) rotate(45deg); }
+           50% { transform: scale(1.05) rotate(45deg); }
+        }
+
+        .cover-footer {
+          margin-top: 2rem;
+        }
+
+        .tiny-divider {
+           width: 30px;
+           height: 1px;
+           background: #DAA520;
+           margin: 0.5rem auto;
+        }
+
+        .tap-instruction {
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.7rem;
+          color: #FFF8F3;
+          background: #8B0000;
+          padding: 0.5rem 1.2rem;
+          border-radius: 99px;
+          text-transform: uppercase;
+          letter-spacing: 0.25em;
+          margin-top: 2rem;
+          font-weight: 700;
+          box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+          animation: tap-pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes tap-pulse {
+          0%, 100% { opacity: 0.8; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.05); }
         }
 
         .page-with-image {

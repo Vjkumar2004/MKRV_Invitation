@@ -9,12 +9,12 @@ interface OpeningScreenProps {
   musicEnabled?: boolean;
 }
 
-const OpeningScreen: React.FC<OpeningScreenProps> = ({ 
-  onOpen, 
-  isPlaying = false, 
-  onToggleMusic, 
-  isIPhone = false, 
-  musicEnabled = false 
+const OpeningScreen: React.FC<OpeningScreenProps> = ({
+  onOpen,
+  isPlaying = false,
+  onToggleMusic,
+  isIPhone = false,
+  musicEnabled = false
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -41,9 +41,9 @@ const OpeningScreen: React.FC<OpeningScreenProps> = ({
     <div className={`opening-screen ${isTransitioning ? 'transitioning-out' : ''}`}>
       {/* Background Image */}
       <div className="background-container">
-        <img 
-          src="/opening-bg.jpg" 
-          alt="Floral Background" 
+        <img
+          src="/opening-bg.jpg"
+          alt="Floral Background"
           className="background-image"
         />
         {/* Gradient Overlay */}
@@ -52,7 +52,7 @@ const OpeningScreen: React.FC<OpeningScreenProps> = ({
 
       {/* Music Control Button - Only for iPhone */}
       {isIPhone && onToggleMusic && (
-        <button 
+        <button
           className="music-control iphone-music-button"
           onClick={onToggleMusic}
           aria-label={isPlaying ? "Pause Music" : "Play Music"}
@@ -65,14 +65,14 @@ const OpeningScreen: React.FC<OpeningScreenProps> = ({
       <div className="content-container">
         <div className="names-container">
           <h1 className="couple-names">
-            Muthukumar & Rajavali
+            Muthukumar & Rajavalli
           </h1>
           <p className="subtitle">Wedding Invitation</p>
         </div>
-        
+
         {/* Open Invitation Button - Hidden on iPhone until music is enabled */}
         {!isIPhone || musicEnabled ? (
-          <button 
+          <button
             className="open-button"
             onClick={handleOpenInvitation}
             aria-label="Open Wedding Invitation"
