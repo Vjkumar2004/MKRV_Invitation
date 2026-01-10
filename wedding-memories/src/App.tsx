@@ -14,9 +14,6 @@ const isIPhone = () => {
   return /iPhone|iPod/.test(navigator.userAgent);
 };
 
-const isAndroid = () => {
-  return /Android/i.test(navigator.userAgent);
-};
 
 function App() {
   const [showMainContent, setShowMainContent] = useState(false);
