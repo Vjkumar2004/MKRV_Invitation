@@ -42,7 +42,7 @@ const Schedule: React.FC = () => {
     },
     {
       date: '19/02/2026',
-      title: 'Engagment',
+      title: 'Engagement',
       description: 'Engagement and sangeet night filled with music and joy.',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="h-20 w-20 sm:h-24 sm:w-24"

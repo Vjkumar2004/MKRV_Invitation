@@ -84,7 +84,7 @@ function App() {
       {/* Global Audio Element */}
       <audio
         ref={audioRef}
-        src="/audio-editor-output.mp3"
+        src="/bg-music.mp3"
         loop
         playsInline
         preload="auto"

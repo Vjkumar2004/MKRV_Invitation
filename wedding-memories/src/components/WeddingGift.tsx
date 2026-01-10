@@ -26,9 +26,20 @@ const WeddingGift: React.FC = () => {
         const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
         if (isAndroid) {
-            // Android: Use intent to force Google Pay for a premium experience
-            const gpayIntent = `intent://pay?${params}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(upiUri)};end`;
+            // Android: Optimized intent for Google Pay (Tez) with a robust fallback to universal UPI
+            // This format works best in Chrome and mobile browsers to trigger the app chooser
+            const androidUpiUri = `upi://pay?${params}`;
+            const gpayIntent = `intent://pay?${params}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(androidUpiUri)};end`;
+
+            // Try the specific intent first
             window.location.href = gpayIntent;
+
+            // Safety fallback for browsers that don't support intent://
+            setTimeout(() => {
+                if (document.hasFocus()) {
+                    window.location.href = androidUpiUri;
+                }
+            }, 800);
         } else if (isIOS) {
             // iOS: Try gpay specifically, then fallback to standard upi chooser
             // gpay:// is the modern scheme; upi:// triggers the generic app picker
