@@ -27,7 +27,7 @@ const Schedule: React.FC = () => {
     {
       date: '25/01/2026',
       title: 'Haldi',
-      description: 'Traditional Haldi ceremony with family and friends.',
+      description: 'Traditional Haldi ceremony with friends.',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="h-20 w-20 sm:h-24 sm:w-24"
           aria-label="Camera icon" role="img">
@@ -42,8 +42,8 @@ const Schedule: React.FC = () => {
     },
     {
       date: '19/02/2026',
-      title: 'Engagment / sangeeth',
-      description: 'Engagement and sangeeth night filled with music and joy.',
+      title: 'Engagment',
+      description: 'Engagement and sangeet night filled with music and joy.',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="h-20 w-20 sm:h-24 sm:w-24"
           aria-label="Wedding cake" role="img">

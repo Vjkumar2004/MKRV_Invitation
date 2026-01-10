@@ -26,14 +26,12 @@
 .gradient-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 240, 245, 0.08) 25%,
-    rgba(255, 228, 225, 0.06) 50%,
-    rgba(255, 240, 245, 0.08) 75%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 240, 245, 0.08) 25%,
+      rgba(255, 228, 225, 0.06) 50%,
+      rgba(255, 240, 245, 0.08) 75%,
+      rgba(255, 255, 255, 0.05) 100%);
 }
 
 .music-control {
@@ -135,12 +133,34 @@
   font-weight: 700;
   color: #722f37;
   margin: 0;
-  line-height: 1.2;
-  text-shadow: 
+  line-height: 1.1;
+  text-shadow:
     0 2px 4px rgba(0, 0, 0, 0.1),
     0 4px 8px rgba(114, 47, 55, 0.2),
     0 0 20px rgba(114, 47, 55, 0.1);
   letter-spacing: 0.02em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.couple-names span {
+  display: block;
+}
+
+.couple-names .ampersand {
+  font-size: 0.8em;
+  opacity: 0.9;
+  margin: 0.2rem 0;
+}
+
+@media (min-width: 768px) {
+  .couple-names {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+  }
 }
 
 .romantic-text {
@@ -178,7 +198,7 @@
   padding: 1rem 2.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(114, 47, 55, 0.15),
     inset 0 0 0 0 rgba(114, 47, 55, 0);
   position: relative;
@@ -189,7 +209,7 @@
 
 .open-button:hover {
   transform: scale(1.05);
-  box-shadow: 
+  box-shadow:
     0 6px 20px rgba(114, 47, 55, 0.25),
     0 0 20px rgba(114, 47, 55, 0.2),
     inset 0 0 0 0 rgba(114, 47, 55, 0);
@@ -223,6 +243,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -233,6 +254,7 @@
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
@@ -242,6 +264,7 @@
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
@@ -251,6 +274,7 @@
   from {
     transform: scale(1);
   }
+
   to {
     transform: scale(1.1);
   }
@@ -260,22 +284,28 @@
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.08);
   }
+
   100% {
     transform: scale(1);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 80%, 100% {
-    box-shadow: 
+
+  0%,
+  80%,
+  100% {
+    box-shadow:
       0 4px 12px rgba(114, 47, 55, 0.15),
       inset 0 0 0 0 rgba(114, 47, 55, 0);
   }
+
   90% {
-    box-shadow: 
+    box-shadow:
       0 4px 12px rgba(114, 47, 55, 0.15),
       0 0 25px rgba(114, 47, 55, 0.3),
       inset 0 0 0 0 rgba(114, 47, 55, 0);
@@ -287,16 +317,17 @@
   .content-container {
     padding: 1.5rem;
   }
-  
+
   .names-container {
     margin-bottom: 2rem;
   }
-  
+
   .open-button {
     padding: 0.875rem 2rem;
-    min-height: 44px; /* iOS tap target minimum */
+    min-height: 44px;
+    /* iOS tap target minimum */
   }
-  
+
   .music-control {
     width: 45px;
     height: 45px;
@@ -304,7 +335,7 @@
     bottom: 15px;
     right: 15px;
   }
-  
+
   .iphone-music-button {
     width: 50px;
     height: 50px;
@@ -317,14 +348,15 @@
   .names-container {
     margin-bottom: 2rem;
   }
-  
+
   .couple-names {
     font-size: clamp(2rem, 6vw, 3rem);
   }
 }
 
 /* Ensure no horizontal scroll */
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 

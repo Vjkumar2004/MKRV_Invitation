@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Left Heart -->
+  <path d="M50,35 C50,20 30,20 30,35 C30,50 50,70 50,80 C50,70 70,50 70,35 C70,20 50,20 50,35 Z" fill="#8B0000" transform="translate(-12, 5) rotate(-15, 38, 50)" />
+  <!-- Right Heart (Slightly lighter red) -->
+  <path d="M50,35 C50,20 30,20 30,35 C30,50 50,70 50,80 C50,70 70,50 70,35 C70,20 50,20 50,35 Z" fill="#D2122E" transform="translate(12, 5) rotate(15, 62, 50)" />
+</svg>

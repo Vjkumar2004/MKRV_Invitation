@@ -9,12 +9,12 @@ const LoveStory: React.FC = () => {
     const storyPages = [
         {
             image: '/timeline 1.avif',
-            title: '💕 2015 – Where It All Began',
-            description: '“2015 – Two strangers, one unexpected connection. Our story quietly began here.”'
+            title: '💕 A Decade ago',
+            description: '“Two strangers, one unexpected connection. Our story quietly began here.”'
         },
         {
             image: '/timeline 2.avif',
-            title: '💕 First Conversations',
+            title: '💕 First Conversation',
             description: '“From simple talks to endless conversations… without knowing, hearts started connecting.”'
         },
         {
@@ -120,21 +120,16 @@ const LoveStory: React.FC = () => {
 
     const renderPage = (pageIndex: number) => {
         if (pageIndex === 0) {
-            // Enhanced Cover page
             return (
-                <div className="book-page book-cover">
+                <div className="book-page book-cover p-0">
                     <div className="book-spine"></div>
-                    <div className="cover-content">
-                        <div className="main-heart-container">
-                            <div className="large-cover-heart">
-                                <h1 className="cover-title heart-text pulse-once">MKRV</h1>
-                            </div>
-                        </div>
-                        <div className="cover-footer">
-                            <p className="footer-text gold-text">A Journey of Love</p>
-                            <div className="tiny-divider"></div>
-                            <p className="tap-instruction">Tap to Open</p>
-                        </div>
+                    <div className="relative w-full h-full overflow-hidden">
+                        <img
+                            src="/book-cover.jpeg"
+                            alt="MKRV Wedding Book Cover"
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/5 pointer-events-none"></div>
                     </div>
                 </div>
             );
@@ -170,31 +165,16 @@ const LoveStory: React.FC = () => {
         if (pageIndex === 10) {
             return (
                 <div className="book-page final-page">
-                    <div className="luxury-ornament l-orn-tl scale-75"></div>
-                    <div className="luxury-ornament l-orn-br scale-75"></div>
-
                     <div className="floating-hearts">
                         {[...Array(5)].map((_, i) => (
                             <span key={i} className={`float-heart fh-${i}`}>❤️</span>
                         ))}
                     </div>
 
-                    <div className="page-content story-page final-content">
-                        <div className="final-header-design">
-                            <div className="final-heart-wrap">
-                                <span className="heart-icon shine-effect">❤️</span>
-                            </div>
+                    <div className="page-content story-page final-content items-center justify-center">
+                        <div className="final-header-design flex flex-col items-center">
                             <h3 className="story-title luxury-gold-title">The Beginning of Forever</h3>
-                            <div className="ornate-separator"></div>
-                        </div>
-
-                        <p className="story-description premium-quote">
-                            “This is not the end of our story… it’s just the beginning of forever.”
-                        </p>
-
-                        <div className="final-footer">
-                            <span className="with-love">With Love,</span>
-                            <span className="couple-names gold-text">Muthukumar & Rajavalli</span>
+                            <div className="ornate-separator mt-4"></div>
                         </div>
                     </div>
                 </div>
@@ -215,7 +195,7 @@ const LoveStory: React.FC = () => {
         <section className="love-story-section">
             <div className="section-header">
                 <p className="section-subtitle reveal-on-scroll">Our Journey</p>
-                <h2 className="section-title reveal-on-scroll reveal-heading delay-100">Love Story</h2>
+                <h2 className="section-title reveal-on-scroll reveal-heading delay-100">Love Album</h2>
                 <div className="section-divider reveal-divider"></div>
             </div>
 
@@ -411,11 +391,11 @@ const LoveStory: React.FC = () => {
           background: #FFF8F3;
           border-radius: 0 8px 8px 0;
           box-shadow: 
-            inset -2px 0 8px rgba(0, 0, 0, 0.1),
-            2px 2px 12px rgba(0, 0, 0, 0.15);
+            inset -2px 0 8px rgba(184, 134, 11, 0.1),
+            2px 2px 12px rgba(184, 134, 11, 0.2);
           position: relative;
           overflow: hidden;
-          border-right: 1px solid rgba(0,0,0,0.05); /* Page edge effect */
+          border-right: 4px solid #BF953F; /* Golden Bar Edge */
         }
 
         /* Paper texture effect - more subtle and realistic */
@@ -434,7 +414,7 @@ const LoveStory: React.FC = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          border-left: 15px solid #8B4513;
+          border-left: 15px solid #BF953F; /* Golden Spine Border */
         }
 
         .book-spine {
@@ -443,8 +423,9 @@ const LoveStory: React.FC = () => {
           top: 0;
           bottom: 0;
           width: 15px;
-          background: linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0) 50%, rgba(255,255,255,0.2));
+          background: linear-gradient(to right, #8A6E2F, #BF953F, #FBF5B7, #BF953F);
           z-index: 10;
+          box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
 
         /* Gold Foil Effect */
@@ -613,7 +594,7 @@ const LoveStory: React.FC = () => {
 
         .shadow-active {
           opacity: 1;
-          background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
+          background: linear-gradient(to right, rgba(184, 134, 11, 0) 0%, rgba(184, 134, 11, 0.3) 100%);
         }
 
         /* Luxury Ornaments */
@@ -723,21 +704,33 @@ const LoveStory: React.FC = () => {
 
         .float-heart {
           position: absolute;
+          left: var(--left, 50%);
+          bottom: -50px;
+          font-size: var(--size, 20px);
           opacity: 0;
-          animation: float-up-fade 4s infinite ease-in-out;
+          animation: float-up-fade var(--duration, 4s) var(--delay, 0s) infinite ease-in-out;
         }
 
         @keyframes float-up-fade {
-          0% { transform: translateY(20px) scale(0.5); opacity: 0; }
-          50% { opacity: 0.5; }
-          100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+          0% { 
+            transform: translateY(0) scale(0.5) rotate(var(--rotate, 0deg)); 
+            opacity: 0; 
+          }
+          20% { 
+            opacity: 0.6; 
+          }
+          100% { 
+            transform: translateY(-600px) scale(1.5) rotate(var(--rotate-end, 45deg)); 
+            opacity: 0; 
+          }
         }
 
-        .fh-0 { left: 20%; animation-delay: 0s; }
-        .fh-1 { left: 40%; animation-delay: 1s; }
-        .fh-2 { left: 60%; animation-delay: 2s; }
-        .fh-3 { left: 80%; animation-delay: 0.5s; }
-        .fh-4 { left: 50%; animation-delay: 1.5s; }
+        .fh-0 { --left: 10%; --duration: 5s; --delay: 0s; --size: 18px; --rotate: -15deg; --rotate-end: 20deg; }
+        .fh-1 { --left: 30%; --duration: 4.5s; --delay: 1.2s; --size: 24px; --rotate: 10deg; --rotate-end: -25deg; }
+        .fh-2 { --left: 50%; --duration: 6s; --delay: 0.5s; --size: 20px; --rotate: -20deg; --rotate-end: 15deg; }
+        .fh-3 { --left: 70%; --duration: 5.5s; --delay: 2s; --size: 22px; --rotate: 25deg; --rotate-end: -10deg; }
+        .fh-4 { --left: 90%; --duration: 4s; --delay: 0.1s; --size: 16px; --rotate: -5deg; --rotate-end: 35deg; }
+        .fh-5 { --left: 40%; --duration: 5.2s; --delay: 3s; --size: 26px; --rotate: 15deg; --rotate-end: -30deg; }
 
         .pulse-once {
           animation: pulse-grow 2s ease-out infinite;

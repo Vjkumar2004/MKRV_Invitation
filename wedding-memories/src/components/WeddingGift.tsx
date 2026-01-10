@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 
 const WeddingGift: React.FC = () => {
-    const [selectedAmount, setSelectedAmount] = useState<number>(501);
+    const [selectedAmount, setSelectedAmount] = useState<number>(0);
     const [showCelebration, setShowCelebration] = useState(false);
 
     const upiId = "muthu16571@ybl";
     const payeeName = "Muthukumar M";
 
-    const getUpiUrl = (amount: number) => {
+    const handlePay = (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (!selectedAmount || selectedAmount <= 0) return;
+
         const pa = upiId;
         const pn = encodeURIComponent(payeeName);
-        const am = amount.toString();
+        const am = selectedAmount.toFixed(2);
         const cu = "INR";
         const tn = encodeURIComponent("Wedding Gift - Blessings");
+
         const params = `pa=${pa}&pn=${pn}&am=${am}&cu=${cu}&tn=${tn}`;
-        const standardUri = `upi://pay?${params}`;
+        const upiUri = `upi://pay?${params}`;
 
         // Detect Platform
         const ua = navigator.userAgent || navigator.vendor;
@@ -22,15 +26,25 @@ const WeddingGift: React.FC = () => {
         const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
         if (isAndroid) {
-            // Android specific intent to force Google Pay
-            return `intent://pay?${params}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(standardUri)};end`;
+            // Android: Use intent to force Google Pay for a premium experience
+            const gpayIntent = `intent://pay?${params}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(upiUri)};end`;
+            window.location.href = gpayIntent;
         } else if (isIOS) {
-            // iOS specific: 'tez://' is the custom scheme for GPay (formerly Tez) on iPhone
-            return `tez://pay?${params}`;
-        }
+            // iOS: Try gpay specifically, then fallback to standard upi chooser
+            // gpay:// is the modern scheme; upi:// triggers the generic app picker
+            const gpayIOS = `gpay://upi/pay?${params}`;
 
-        // Fallback to standard UPI for other platforms
-        return standardUri;
+            // Try specific GPay link
+            window.location.href = gpayIOS;
+
+            // Fallback to generic UPI chooser after a small delay if GPay isn't found
+            setTimeout(() => {
+                window.location.href = upiUri;
+            }, 500);
+        } else {
+            // Desktop/Other: Generic UPI
+            window.location.href = upiUri;
+        }
     };
 
     const handleAmountSelect = (amount: number) => {
@@ -90,7 +104,6 @@ const WeddingGift: React.FC = () => {
                             </p>
                         </div>
 
-                        {/* Manual Amount Input Field */}
                         <div className="mb-12 max-w-xs mx-auto relative z-10">
                             <label className="block text-[10px] uppercase tracking-[0.2em] text-[#8B4513]/60 font-bold mb-4">Enter Amount</label>
                             <div className="relative group">
@@ -99,17 +112,16 @@ const WeddingGift: React.FC = () => {
                                     type="number"
                                     value={selectedAmount || ''}
                                     onChange={(e) => handleAmountSelect(Number(e.target.value))}
-                                    placeholder="Enter amount"
                                     className="w-full pl-12 pr-6 py-5 bg-white/40 backdrop-blur-md rounded-2xl border-2 border-[#ecd6bc] text-[#8B4513] font-serif text-3xl text-center focus:outline-none focus:border-[#8B4513] focus:bg-white/60 transition-all duration-300 shadow-inner group-hover:shadow-lg"
                                 />
                             </div>
                             <p className="mt-4 text-[11px] text-[#5D4037]/60 italic font-serif">"Every blessing, small or large, means the world to us."</p>
                         </div>
 
-                        {/* Enhanced Payment Button (Image Removed) */}
+                        {/* Enhanced Payment Button */}
                         <div className="reveal-on-scroll delay-400">
-                            <a
-                                href={getUpiUrl(selectedAmount)}
+                            <button
+                                onClick={handlePay}
                                 className={`gift-pay-button group relative inline-flex items-center justify-center w-full sm:w-auto px-16 py-6 bg-[#8B0000] text-[#FFF8F3] rounded-full overflow-hidden shadow-[0_20px_40px_-10px_rgba(139,0,0,0.5)] transition-all hover:scale-[1.03] active:scale-95 ${!selectedAmount || selectedAmount <= 0 ? 'opacity-50 pointer-events-none grayscale' : ''}`}
                             >
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
@@ -118,9 +130,9 @@ const WeddingGift: React.FC = () => {
                                         Bless via GPay / UPI
                                     </span>
                                 </div>
-                            </a>
+                            </button>
                             <p className="mt-6 text-[11px] uppercase tracking-[0.3em] text-[#8B4513]/50 font-bold">
-                                🔒 Secure Gift • {selectedAmount === 5001 ? "Extra Special " : ""} Blessings
+                                🔒 Secure Gift • {selectedAmount >= 500 ? "Extra Special " : ""} Blessings
                             </p>
                         </div>
                     </div>

@@ -1,46 +1,46 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
-    return (
-        <footer className="footer-section relative py-20 px-4 bg-[#FFF8F3] overflow-hidden">
-            {/* Decorative Ornaments */}
-            <div className="footer-ornament f-orn-l"></div>
-            <div className="footer-ornament f-orn-r"></div>
+  return (
+    <footer className="footer-section relative py-20 px-4 bg-[#FFF8F3] overflow-hidden">
+      {/* Decorative Ornaments */}
+      <div className="footer-ornament f-orn-l"></div>
+      <div className="footer-ornament f-orn-r"></div>
 
-            <div className="container mx-auto max-w-2xl text-center relative z-10">
-                <div className="heart-shimmer mb-6">❤️</div>
+      <div className="container mx-auto max-w-2xl text-center relative z-10">
+        <div className="heart-shimmer mb-6">❤️</div>
 
-                <h2 className="quote-text mb-8">
-                    "Your presence is the most beautiful gift of all. We can't wait to celebrate our journey of love with you!"
-                </h2>
+        <h2 className="quote-text mb-8">
+          "We can't wait to celebrate our journey of love with you!"
+        </h2>
 
-                <div className="gold-seal-container mb-10">
-                    <div className="seal-line"></div>
-                    <p className="see-you-text">See You Soon!</p>
-                    <div className="seal-line"></div>
-                </div>
+        <div className="gold-seal-container mb-10">
+          <div className="seal-line"></div>
+          <p className="see-you-text">See You Soon!</p>
+          <div className="seal-line"></div>
+        </div>
 
-                <div className="footer-names">
-                    <p className="signature-text">Muthukumar & Rajavalli</p>
-                    <div className="date-badge">20 • 02 • 2026</div>
-                </div>
+        <div className="footer-names">
+          <p className="signature-text">Muthukumar & Rajavalli</p>
+          <div className="date-badge">20 • 02 • 2026</div>
+        </div>
 
-                <div className="mt-12 flex flex-col items-center gap-4">
-                    <p className="copyright-text opacity-50">
-                        Present by Invite2gather
-                    </p>
-                    <a
-                        href="https://invite2gather.site"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="create-own-btn"
-                    >
-                        Create own <span>✨</span>
-                    </a>
-                </div>
-            </div>
+        <div className="mt-12 flex flex-col items-center gap-4">
+          <p className="copyright-text opacity-50">
+            Presented by Invite2gather
+          </p>
+          <a
+            href="https://invite2gather.site"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="create-own-btn"
+          >
+            Create your own <span>✨</span>
+          </a>
+        </div>
+      </div>
 
-            <style>{`
+      <style>{`
         .create-own-btn {
           font-family: 'Outfit', sans-serif;
           font-size: 0.75rem;
@@ -164,8 +164,8 @@ const Footer: React.FC = () => {
           }
         }
       `}</style>
-        </footer>
-    );
+    </footer>
+  );
 };
 
 export default Footer;

@@ -7,7 +7,7 @@ const EventDetails: React.FC = () => {
         <div className="max-w-4xl mx-auto rounded-[32px] bg-white shadow-soft border border-roseveil/80 px-4 sm:px-10 lg:px-16 py-10 sm:py-14 reveal-on-scroll hover-lift">
           <div className="flex flex-col items-center text-center">
             <div className="mb-8 sm:mb-10 w-52 sm:w-64 md:w-72 aspect-[3/4] rounded-t-[60%] rounded-b-[32px] overflow-hidden bg-roseveil/80 border border-roseveil shadow-soft delay-200">
-              <img loading="lazy" src="/timeline-9-replace.jpeg" alt="Wedding ceremony" className="w-full h-full object-cover" />
+              <img loading="lazy" src="/timeline 9.avif" alt="Wedding ceremony" className="w-full h-full object-cover" />
             </div>
             <h1 className="font-serif text-2xl sm:text-3xl tracking-[0.03em] text-deepred-700 reveal-on-scroll reveal-heading delay-100">Wedding Ceremony</h1>
             <p className="mt-2 text-xs sm:text-sm tracking-[0.16em] uppercase text-deepred-700/60 reveal-on-scroll delay-200">

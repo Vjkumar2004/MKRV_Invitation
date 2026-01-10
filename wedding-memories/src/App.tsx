@@ -8,19 +8,31 @@ import WeddingGift from './components/WeddingGift';
 import LazySection from './components/LazySection';
 import OpeningScreen from './components/OpeningScreen';
 import Footer from './components/Footer';
+import Location from './components/Location';
 
-// Utility function to detect iPhone
 const isIPhone = () => {
   return /iPhone|iPod/.test(navigator.userAgent);
+};
+
+const isAndroid = () => {
+  return /Android/i.test(navigator.userAgent);
 };
 
 function App() {
   const [showMainContent, setShowMainContent] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [musicEnabled, setMusicEnabled] = useState(false);
+  const [hasUserPaused, setHasUserPaused] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleOpenInvitation = () => {
+    // Attempt play on click for Android/Windows if not paused
+    if (!isIPhone() && audioRef.current && !isPlaying && !hasUserPaused) {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+        setMusicEnabled(true);
+      }).catch(err => console.log("Play on open failed", err));
+    }
     setShowMainContent(true);
   };
 
@@ -28,11 +40,13 @@ function App() {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setHasUserPaused(true);
       } else {
-        audioRef.current.play().catch(error => {
+        audioRef.current.play().then(() => {
+          setHasUserPaused(false);
+        }).catch(error => {
           console.log('Audio play failed:', error);
         });
-        // Set music as enabled when first played (for iPhone flow)
         if (!musicEnabled) {
           setMusicEnabled(true);
         }
@@ -40,12 +54,37 @@ function App() {
       setIsPlaying(!isPlaying);
     }
   };
+
+  // Autoplay logic for Android/Windows on first interaction
+  useEffect(() => {
+    if (!isIPhone() && !isPlaying && !hasUserPaused) {
+      const startMusic = () => {
+        if (audioRef.current && !isPlaying && !hasUserPaused) {
+          audioRef.current.play().then(() => {
+            setIsPlaying(true);
+            setMusicEnabled(true);
+          }).catch(err => console.log("Autoplay blocked", err));
+        }
+        window.removeEventListener('click', startMusic);
+        window.removeEventListener('touchstart', startMusic);
+      };
+
+      window.addEventListener('click', startMusic);
+      window.addEventListener('touchstart', startMusic);
+
+      return () => {
+        window.removeEventListener('click', startMusic);
+        window.removeEventListener('touchstart', startMusic);
+      };
+    }
+  }, [isPlaying, hasUserPaused]);
+
   return (
     <>
       {/* Global Audio Element */}
       <audio
         ref={audioRef}
-        src="/Idicha-Pacharisi.mp3"
+        src="/audio-editor-output.mp3"
         loop
         playsInline
         preload="auto"
@@ -65,7 +104,7 @@ function App() {
       {/* Main Content - Shows after opening */}
       {showMainContent && (
         <>
-          {/* Music Control Button */}
+          {/* Music Control Button - Always visible in main invitation */}
           <button
             className="music-control"
             onClick={toggleMusic}
@@ -188,7 +227,10 @@ function App() {
               <LoveStory />
             </LazySection>
 
-
+            {/* Location Section */}
+            <LazySection minHeight="600px">
+              <Location />
+            </LazySection>
 
             <div className="h-24 bg-gradient-to-b from-[#f9f7f4] to-[#FFF8F3]"></div>
 

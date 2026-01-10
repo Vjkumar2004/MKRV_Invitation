@@ -65,7 +65,9 @@ const OpeningScreen: React.FC<OpeningScreenProps> = ({
       <div className="content-container">
         <div className="names-container">
           <h1 className="couple-names">
-            Muthukumar & Rajavalli
+            <span className="first-name">Muthukumar</span>
+            <span className="ampersand">&</span>
+            <span className="second-name">Rajavalli</span>
           </h1>
           <p className="subtitle">Wedding Invitation</p>
         </div>
