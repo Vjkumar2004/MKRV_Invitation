@@ -26,13 +26,20 @@ const WeddingGift: React.FC = () => {
         const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
         if (isAndroid) {
-            // Android: Use universal UPI scheme which is more robust than intent://
-            // Adding mc=0000 and mode=02 helps GPay and other apps validate the transaction
-            const androidParams = `pa=${pa}&pn=${pn}&am=${selectedAmount}&cu=${cu}&tn=${tn}&mc=0000&mode=02`;
-            const upiUrl = `upi://pay?${androidParams}`;
+            // Android: Match the successful iPhone logic by using 'googlepay://' if possible
+            // and ensuring the amount has exactly two decimal places (handled in 'params')
+            const gpayAndroid = `googlepay://upi/pay?${params}`;
+            const upiUrl = `upi://pay?${params}`;
 
-            // Direct redirect is more stable for Android browsers
-            window.location.href = upiUrl;
+            // Try direct GPay link
+            window.location.href = gpayAndroid;
+
+            // Fallback to universal UPI chooser
+            setTimeout(() => {
+                if (document.hasFocus()) {
+                    window.location.href = upiUrl;
+                }
+            }, 600);
         } else if (isIOS) {
             // iOS: Try gpay specifically, then fallback to standard upi chooser
             // gpay:// is the modern scheme; upi:// triggers the generic app picker
