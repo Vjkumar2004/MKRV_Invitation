@@ -9,6 +9,7 @@ import LazySection from './components/LazySection';
 import OpeningScreen from './components/OpeningScreen';
 import Footer from './components/Footer';
 import Location from './components/Location';
+import { Analytics } from '@vercel/analytics/react';
 
 const isIPhone = () => {
   return /iPhone|iPod/.test(navigator.userAgent);
@@ -78,6 +79,7 @@ function App() {
 
   return (
     <>
+      <Analytics />
       {/* Global Audio Element */}
       <audio
         ref={audioRef}
